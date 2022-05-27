@@ -117,7 +117,7 @@ __Ruta de detalle de receta__: debe contener
 - [ ] Paso a paso
 
 __Ruta de creación de recetas__: debe contener
-- [ ] Un formulario __controlado con JavaScript__ con los siguientes campos:
+- [ ] Un formulario __controlado con JavaScript__ con los siguientes campos: 
   - Nombre
   - Resumen del plato
   - Puntuación
@@ -173,5 +173,6 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ ] Al menos tener un componente del frontend con sus tests respectivos
 - [ ] Al menos tener una ruta del backend con sus tests respectivos
 - [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
-#   P I - F o o d - m a i n  
+#   P I - F o o d - m a i n 
+ 
  
