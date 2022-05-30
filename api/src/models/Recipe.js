@@ -21,6 +21,9 @@ module.exports = (sequelize) => {
     instructions: {
       type: DataTypes.STRING,
     }
+  },{
+    createdAt: false,
+    updatedAt: false
   });
 };
 
