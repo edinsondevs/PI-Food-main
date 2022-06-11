@@ -3,7 +3,7 @@ const { Router, response } = require("express");
 const axios = require("axios");
 const { Recipe, TypeDiet } = require("../db.js");
 
-const { API_Key2 } = process.env; //    CAMBIAR EN TODOS LOS FETCH EL NOMBRE HASTA API_Key2 si se bloquea la API por consultas
+const { API_temp } = process.env; //    CAMBIAR EN TODOS LOS FETCH EL NOMBRE HASTA API_temp  si se bloquea la API por consultas
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -19,7 +19,7 @@ const router = Router();
 //************************************            CONSULTA A LA API
 const getApi = async () => {
   const api = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&addRecipeInformation=true&number=2`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&addRecipeInformation=true&number=100`
   );
   // const  api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=7975980691ef48ff83507b262e3c6d47&number=2&addRecipeInformation=true`)
   const apiInfo = api.data.results.map((e) => {
@@ -81,7 +81,8 @@ router.get("/prueba", async (req, res, next) => {
   // const printPrueba = []
   try {
     let prueba = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&number=2&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&number=2&addRecipeInformation=true`
+      //`https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese&X-RapidAPI-Key=135849fecfmsh0f019d564259576p172a81jsnea91d0f9816b`
     );
     const prueba2 = await prueba.data.results.map((e) => {
       return {
@@ -102,16 +103,15 @@ router.get("/prueba", async (req, res, next) => {
 });
 
 //*************************************           GET TYPES PENDIENTE **************************** */
-//    EXTRAE SOLO LOS DATOS NECESARIOS
-//************************************************************************************************************************************************************************************ */
+//    EXTRAE SOLO LOS DATOS NECESARIOS//************************************************************************************************************************************************************************************ */
 // Obtener TODOS los tipos de dieta posibles
 // En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
 router.get("/types", async (req, res, next) => {
-  // CARGO LA BD CON LOS TYPES DE DIETAS
-  
+  // CARGO LA BD CON LOS TYPES DE DIETAS  
   try {
     const type = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&number=10&addRecipeInformation=true`
+      // `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&number=9&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&addRecipeInformation=true&number=100`
     );
     res.send(
       type.data.results.map((e) => {
@@ -146,7 +146,7 @@ router.get("/recipes", async (req, res) => {
   // res.send(dbInfoQuery)
   // try {
   let recipes = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&addRecipeInformation=true&number=100&query=${name}`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&addRecipeInformation=true&number=100&query=${name}`
   );
   apiInfoQuery = await recipes.data.results.map((e) => {
     return {
@@ -183,7 +183,7 @@ router.get("/recipes/:id", async (req, res, next) => {
     if (!verifId.test(id)) {
       let apiInfoDetail = {};
       let response = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_Key2}`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_temp }`
       );
       let apiIdInfo2 = response.data;
       apiInfoDetail = {
@@ -253,4 +253,3 @@ router.post("/recipe", async (req, res, next) => {
 
 module.exports = router;
 
-//https://api.spoonacular.com/recipes/complexSearch?apiKey=7975980691ef48ff83507b262e3c6d47&addRecipeInformation=true&number=2&name=pollo

@@ -20,6 +20,28 @@ https://api.spoonacular.com/recipes/complexSearch
 
 https://api.spoonacular.com/recipes/{id}/information
 
-https://api.spoonacular.com/recipes/complexSearch?apiKey=ef244a0754514ed2ac01df73f538144e
+https://api.spoonacular.com/recipes/complexSearch?apiKey=ef244a0754514ed2ac01df73f538144e&number=1000
 
 https://api.spoonacular.com/recipes/{id}/information?apiKey=ef244a0754514ed2ac01df73f538144e
+
+
+
+
+
+
+
+
+
+
+dogs?.filter((b) => b.name.toLowerCase().includes(input.toLowerCase()))
+
+
+
+const axios = require('axios')
+const {Temperament} = require('../db')
+const {API_KEY} = process.env;
+
+async function databaseLoader(){
+    const races = (await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)).data
+    let array = races.map(e => e.temperament).toString().split(/\s*,\s*/) // regular expression para hacer split de espacios y comas
+    let final = [...new Set(array)] // hago un set para quitar duplicados y lo encierro con [] para hacerlo un array

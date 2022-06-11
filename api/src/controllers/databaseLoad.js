@@ -1,12 +1,12 @@
 require("dotenv").config();
-const { API_Key2 } = process.env;
+const { API_Key4 } = process.env;
 const axios = require('axios');
 const { TypeDiet } = require('../db.js');
 
 //      CARGO LOS TIPOS DE DIETAS EN LA BASE DE DATOS PARA TENERLOS PRECARGADOS
 async function databaseLoad() {
     let tempdiets = []    
-    recipeApi = axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&number=5&addRecipeInformation=true`);
+    recipeApi = axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key4}&number=5&addRecipeInformation=true`);
         
     Promise.all([recipeApi])
     .then((respuesta) => {

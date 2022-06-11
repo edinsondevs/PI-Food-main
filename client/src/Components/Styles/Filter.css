@@ -1,0 +1,34 @@
+/* .sidebar {
+    min-height: 91vh;
+    max-width: 130px;
+    position:fixed;
+    /* z-index: 1; 
+    background-color: rgba(212, 19, 19, 0.31);
+    /* overflow-x: hidden; 
+    padding-top: 16px;
+  }
+
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(18, 18, 18);
+    display: block;
+  }
+
+  .sidebar a:hover {
+    border: solid 1px yellow;   
+    background-color: black;
+    color:  yellow;
+  }
+
+  .main {
+    /* margin-left: 160px;  Same as the width of the sidenav */
+    /* padding: 0px 10px; 
+  }
+  */
+/* 
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;} 
+  } */

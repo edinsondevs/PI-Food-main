@@ -23,8 +23,9 @@ const { conn } = require('./src/db.js');
 const databaseLoad = require('./src/controllers/databaseLoad.js');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  databaseLoad()
+conn.sync({ force: false }).then(() => {
+  //  DESCOMENTAR PARA CARGAR LA BD CON LOS TYPES DE DIETAS
+  // databaseLoad() 
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });

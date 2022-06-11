@@ -133,12 +133,12 @@ __Ruta de creación de recetas__: debe contener
 El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterisco deben ser obligatorias):
 
 - [ ] Receta con las siguientes propiedades:
-  - ID: *
-  - Nombre *
-  - Resumen del plato *
-  - Puntuación
-  - Nivel de "comida saludable"
-  - Paso a paso
+  - ID: * 
+  - Nombre *                                 __name__
+  - Resumen del plato *                 __summary__
+  - Puntuación                               __aggregateLikes__
+  - Nivel de "comida saludable"    __healthScore__
+  - Paso a paso                              __instructions__
 - [ ] Tipo de dieta con las siguientes propiedades:
   - ID
   - Nombre
