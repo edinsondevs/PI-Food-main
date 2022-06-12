@@ -13,25 +13,18 @@ function navigation() {
                     </h1>
                     <nav>
                         <ul>
-                        <li className="nav">
-                            </li>
-                                <NavLink to="/create"> Crear Receta </NavLink>
-                            <li className="nav">
-                                <NavLink to="/"> Exit </NavLink>
-                            </li>
-                            <li className="nav cmp-nav_search">
-                                <input
-                                    type="text"
-                                    name="search"
-                                    className="nav cmp-container-nav_search"
-                                    placeholder="Ingresa ingrediente..."
-                                />
-                            </li>
-                            <li className="nav">
-                                <a href=" #" className="cmp-container-nav_btn button">
-                                    Buscar Receta
-                                </a>
-                            </li>
+                            <NavLink className="button" to="/create"> Crear Receta </NavLink>
+                            <NavLink className="button" to="/ordering" > Ordena de Z - A </NavLink>
+                            <NavLink className="button" to="/"> Exit </NavLink>
+                            
+                            <input
+                                type="text"
+                                name="search"
+                                className="nav cmp-container-nav_search "
+                                placeholder="Ingresa ingrediente..."
+                            />
+                            <NavLink to="/#" className="button"> Buscar Receta </NavLink>
+                            
                         </ul>
                     </nav>
                 </div>

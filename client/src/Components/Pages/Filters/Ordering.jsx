@@ -4,7 +4,7 @@ import ButtonPrev from '../../Icons/PrevPage.jsx';
 import '../../Styles/Cards.css'
 // import { NavLink }from 'react-router-dom';
 
-const Cards = ({ datosApi, numberPage }) => {
+const Ordering = ({ ordering, numberPage }) => {
 
     const [valor1, setValor1] = useState(0);
     const [valor2, setValor2] = useState(numberPage);
@@ -15,9 +15,11 @@ const Cards = ({ datosApi, numberPage }) => {
     // },600)
     // useEffect(() => {    //    // setLoadings(true);
     // }, [])
-
+    const api = ordering
+    console.log(api)
+    
     const next_Page = () => {
-        if (valor2 >= datosApi.length) { }
+        if (valor2 >= ordering.length) { }
         else {
             setValor1(valor1 + numberPage);
             setValor2(valor2 + numberPage);
@@ -32,9 +34,17 @@ const Cards = ({ datosApi, numberPage }) => {
             setCurrent(current - 1);
         }
     }
-
+    
+    const order = (x,y) => {
+        if (x.title < y.title) {return 1;}
+        if (x.title > y.title) {return -1;}
+        return 0;
+    }    
+    // console.log(ordering.sort(order))    
+    
     return (
         <div>
+            {/* {console.log(SortArray)} */}
             {/***********************  Visualizacion del paginado *************************/}
             <div className="learn-more_title">
                 <h3>Previus</h3>
@@ -52,7 +62,7 @@ const Cards = ({ datosApi, numberPage }) => {
             </div>
             {/***********************  Visualizacion de Recetas  *************************/}
             {!loadings && <div className="section_cards">
-                {datosApi.slice(valor1, valor2).map((e) => {
+                {ordering.sort(order).slice(valor1, valor2).map((e) => {
                     return (
                         <div className="card" key={e.id}>
                             <div >
@@ -64,7 +74,7 @@ const Cards = ({ datosApi, numberPage }) => {
                                         <div>Tipo de Dieta: {e.glutenFree}</div>
                                         <div>{e.id}</div>
                                         <button className="card-button" >
-                                            {/* <NavLink to='/Card'>    */}
+                                             {/* <NavLink to='/Card'>     */}
                                             More info
                                             {/* </NavLink> */}
                                         </button>
@@ -73,9 +83,8 @@ const Cards = ({ datosApi, numberPage }) => {
                             </div>
                         </div>
                     )
-                })}
+                }) }
             </div>}
-
             {loadings &&
                 <img src="https://c.tenor.com/tEBoZu1ISJ8AAAAC/spinning-loading.gif" alt="" />
             }
@@ -83,4 +92,4 @@ const Cards = ({ datosApi, numberPage }) => {
     )
 }
 
-export default Cards;
+export default Ordering;

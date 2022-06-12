@@ -12,9 +12,8 @@ function App() {
 
   const dispatch = useDispatch();
   // const recipes = useSelector((state) => state);
-
+  
   useEffect(() => {
-    //fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=f55675efd94440d29172e34f9afb5760&number=2')
     fetch("http://localhost:3001/types")
       .then((response) => response.json())
       .then((data) => dispatch(addRecipes(data)));
@@ -27,7 +26,6 @@ function App() {
         {/* ACA VA EL COMPONENTE QUE SE RENDERIZA EN TODA LA PAGINA */}
         <Routes>
           <Route path="/" element={<LeadingPage />} exact />
-
           <Route path="/*" element={<Home />} exact />
         </Routes>
       </BrowserRouter>

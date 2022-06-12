@@ -19,7 +19,7 @@ const router = Router();
 //************************************            CONSULTA A LA API
 const getApi = async () => {
   const api = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&addRecipeInformation=true&number=100`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`
   );
   // const  api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=7975980691ef48ff83507b262e3c6d47&number=2&addRecipeInformation=true`)
   const apiInfo = api.data.results.map((e) => {
@@ -81,7 +81,7 @@ router.get("/prueba", async (req, res, next) => {
   // const printPrueba = []
   try {
     let prueba = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&number=2&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&number=2&addRecipeInformation=true`
       //`https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese&X-RapidAPI-Key=135849fecfmsh0f019d564259576p172a81jsnea91d0f9816b`
     );
     const prueba2 = await prueba.data.results.map((e) => {
@@ -111,14 +111,14 @@ router.get("/types", async (req, res, next) => {
   try {
     const type = await axios.get(
       // `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&number=9&addRecipeInformation=true`
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&addRecipeInformation=true&number=100`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`
     );
     res.send(
       type.data.results.map((e) => {
         return {
           id: e.id,
-          image: e.image,
           title: e.title,
+          image: e.image,
           vegetarian: e.vegetarian,
           vegan: e.vegan,
           glutenFree: e.glutenFree,
@@ -146,7 +146,7 @@ router.get("/recipes", async (req, res) => {
   // res.send(dbInfoQuery)
   // try {
   let recipes = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp }&addRecipeInformation=true&number=100&query=${name}`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100&query=${name}`
   );
   apiInfoQuery = await recipes.data.results.map((e) => {
     return {
@@ -183,7 +183,7 @@ router.get("/recipes/:id", async (req, res, next) => {
     if (!verifId.test(id)) {
       let apiInfoDetail = {};
       let response = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_temp }`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_temp}`
       );
       let apiIdInfo2 = response.data;
       apiInfoDetail = {

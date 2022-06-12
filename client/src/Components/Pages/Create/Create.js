@@ -90,7 +90,7 @@ export default function Form() {
           <p className="item4">
             <label>Nivel de Comida Saludable</label>
 
-            <div class="value">0</div>
+            <div className="value">0</div>
             <input type=""></input>
             
             {/* <input type="range" value="25"></input>           */}
