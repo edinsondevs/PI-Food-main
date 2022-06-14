@@ -12,10 +12,15 @@ function navigation() {
                         <NavLink to="/home">Home</NavLink>
                     </h1>
                     <nav>
-                        <ul>
+                        <ul >
                             <NavLink className="button" to="/create"> Crear Receta </NavLink>
-                            <NavLink className="button" to="/ordering" > Ordena de Z - A </NavLink>
+                            {/* <NavLink className="button" to="/ordering" > Ordena de Z - A </NavLink> */}
                             <NavLink className="button" to="/"> Exit </NavLink>
+                            
+                            <select name="filters" className="cmp-select"> 
+                                <option value="A-Z">A - Z</option>
+                                <option value="Z-A">Z - A</option>
+                            </select>
                             
                             <input
                                 type="text"
@@ -24,11 +29,10 @@ function navigation() {
                                 placeholder="Ingresa ingrediente..."
                             />
                             <NavLink to="/#" className="button"> Buscar Receta </NavLink>
-                            
                         </ul>
                     </nav>
                 </div>
-            </div>
+            </div>        
         </>
     );
 }

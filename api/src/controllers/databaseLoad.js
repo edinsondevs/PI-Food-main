@@ -21,7 +21,7 @@ async function databaseLoad() {
         var unique = [...new Set(tempdiets)];
 
         let arraytempdiets = Array.from(unique)
-        const tipo = TypeDiet.bulkCreate(arraytempdiets.map(t => ({ name: t })))
+        const tipo = TypeDiet.bulkCreate(arraytempdiets.map(t => ({ title: t })))
         console.log('Tabla de Dietas y Tipos Grabadas')
         return "ok" 
     })

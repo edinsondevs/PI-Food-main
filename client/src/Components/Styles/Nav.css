@@ -1,19 +1,16 @@
-
 /****************************************************************************************************************************
 *******************************             NAVIGATION BAR           ********************************************************
 ****************************************************************************************************************************/
-
+ 
 .navbar {
     position: relative;
 }
 
 nav {
-    /* background-color: #ff006d;     */
+    
     background-color: black;
     grid-column: 1/-1;
     display: grid;
-    /* height: 10vh; */    
-    /* place-content: center; */
 }
 
 
@@ -43,8 +40,7 @@ nav {
     align-items: center;
 }
 
-.navbar .nav{
-    
+.navbar .nav{    
     padding:  2px;
     margin: 0 10px;
 }
@@ -52,24 +48,49 @@ nav {
 .cmp-container-nav_search{
     background-color: rgb(162, 166, 166);
     height: 35px;
-    /* font-style: italic; */
     color:white;
-    border-radius: 1em;
+    border-radius: 0.5em;
     padding: 0.5em;
 }
 
 .button {
     width: 150px;
-    color: white;
+    /* color: white; */
     text-align: center;
     height: 35px;
-    border: 1px solid rgb(168, 220, 13);
-    border-radius: 1em;
+    /* border: 1px solid rgb(168, 220, 13); */
+    border-radius: 0.5em;
     padding: 0.2em;
     margin: 0.5em;
 }
 
+.cmp-select{
+    border-radius: 0.5em;
+    padding: 0.2em;
+    margin: 0.5em;
+    text-align: center;
+    height: 35px;    
+    background-color: rgb(162, 166, 166);    
+
+}
+
 .button:hover {
     background-color: rgb(162, 166, 166);    
-    border-radius: 2rem;
+    border-radius: 0.5rem;
 } 
+
+.nab-sub > li {
+
+    float: right;
+		position: relative;
+		border-right: 1px solid rgba(0,0,0,.1);
+		box-shadow: 1px 0 0 rgba(255,255,255,.25);
+		perspective: 1000px;
+}
+
+.nav-sub > li:first-child{ 
+border-right: 1px solid rgba(255,255,255,.25);
+box-shadow: -1px 0 0 rgba(0,0,0,.1), 1px 0 0 rgba(255,255,255,.25);
+} 
+
+

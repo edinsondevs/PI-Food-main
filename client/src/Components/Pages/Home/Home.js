@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 // import { useState } from "react";
 import Card  from '../Card/Card.jsx'; //
-
+ 
 const Home = () => {
   const datos_Api = useSelector((state) => state.recipes);
   const ordering = datos_Api

@@ -9,6 +9,12 @@ export const reducer = (state = initialState, action) => {
                 ...state, recipes: action.recipes,
             })
         } 
+        case "SEARCH_TYPES": {
+            return {
+                ...state, 
+                recipes: action.payload
+            }
+        }
 
         default:
             return state

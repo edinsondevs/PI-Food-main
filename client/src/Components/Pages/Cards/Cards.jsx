@@ -51,12 +51,15 @@ const Cards = ({ datosApi, numberPage }) => {
                 </button>
             </div>
             {/***********************  Visualizacion de Recetas  *************************/}
-            {!loadings && <div className="section_cards">
+            { datosApi.length !== 0 &&
+            // { !loadings && }
+            <div className="section_cards">
+            {/* if (!datosApi) {console.log("No hay datos")} */}
                 {datosApi.slice(valor1, valor2).map((e) => {
                     return (
                         <div className="card" key={e.id}>
-                            <div >
-                                <img src={e.image} alt="" />
+                            <div>
+                                <img src={e.image} alt="" className="img"/>
                                 <div>
                                     <div>{e.name}</div>
                                     <div>
@@ -76,8 +79,11 @@ const Cards = ({ datosApi, numberPage }) => {
                 })}
             </div>}
 
-            {loadings &&
-                <img src="https://c.tenor.com/tEBoZu1ISJ8AAAAC/spinning-loading.gif" alt="" />
+            {datosApi.length === 0 &&
+                // LOADING....
+                <div className="cmp-loading">
+                {/* <div className="color"></div> */}
+                </div>
             }
         </div>
     )

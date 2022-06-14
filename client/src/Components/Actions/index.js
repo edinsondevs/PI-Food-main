@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 export const addRecipes = (recipes) =>{
 
@@ -7,3 +8,14 @@ export const addRecipes = (recipes) =>{
     })
 
 }
+
+export const searchTypes = () => { 
+    return async (dispatch) => {
+        var json = await axios.get('http://localhost:3001/types');
+        return dispatch({
+            type: 'SEARCH_TYPES',
+            payload: json.data
+        })
+    }   
+}
+
