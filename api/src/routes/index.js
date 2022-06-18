@@ -3,10 +3,10 @@ const { Router, response } = require("express");
 const axios = require("axios");
 const { Recipe, TypeDiet } = require("../db.js");
 
-const { API_Key2 } = process.env; //    CAMBIAR EN TODOS LOS FETCH EL NOMBRE HASTA API_Key2  si se bloquea la API por consultas
+const { API_temp } = process.env; //    CAMBIAR EN TODOS LOS FETCH EL NOMBRE HASTA API_temp  si se bloquea la API por consultas
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
+ 
 const router = Router();
 
 
@@ -19,7 +19,7 @@ const router = Router();
 //************************************            CONSULTA A LA API
 const getApi = async () => {
   const api = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&addRecipeInformation=true&number=100`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`
   );
   // const  api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=7975980691ef48ff83507b262e3c6d47&number=2&addRecipeInformation=true`)
   const apiInfo = api.data.results.map((e) => {
@@ -27,16 +27,11 @@ const getApi = async () => {
       id: e.id,
       image: e.image,
       title: e.title,
-      vegetarian: e.vegetarian,
-      vegan: e.vegan,
-      glutenFree: e.glutenFree,
-      dietas: e.diets,
+      typeDiets: e.diets.map((e) => e),
     };
   });
   return apiInfo;
 };
-
-
 
 //***************************************       CONSULTA A LA BD
 const getDb = async () => {
@@ -51,11 +46,12 @@ const getDb = async () => {
   });
 };
 
-const getAllDiets = async () => {
+//***************************************       BUSQUEDA DE TIPOS DE DIETAS
+  const getAllDiets = async () => {
   const getApiInfo = await getApi();
   const getDbInfo = await getDb();
   const infoTotal = getApiInfo.concat(getDbInfo);
-  return infoTotal;
+  return infoTotal; 
 };
 
 //************************************************************************************************************************************************************************************ */
@@ -66,7 +62,7 @@ router.get("/prueba", async (req, res, next) => {
   // const printPrueba = []
   try {
     let prueba = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&number=2&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&number=2&addRecipeInformation=true`
       //`https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese&X-RapidAPI-Key=135849fecfmsh0f019d564259576p172a81jsnea91d0f9816b`
     );
     const prueba2 = await prueba.data.results.map((e) => {
@@ -77,17 +73,17 @@ router.get("/prueba", async (req, res, next) => {
         vegetarian: e.vegetarian,
         vegan: e.vegan,
         glutenFree: e.glutenFree,
-        dietas: e.diets,
+        typeDiets: e.diets,
       };
     });
     res.send(prueba2);
     return prueba2;
   } catch (error) {
-    next();
+    next(error);
   }
 });
 
-//*************************************           GET TYPES PENDIENTE **************************** */
+//*************************************    GET TYPES  **************************** */
 //    EXTRAE SOLO LOS DATOS NECESARIOS
 // Obtener TODOS los tipos de dieta posibles
 // En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
@@ -98,34 +94,24 @@ router.get("/types", async (req, res, next) => {
 
   try {
     const type = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&addRecipeInformation=true&number=100`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`
     );
     apiInfoQuery = await type.data.results.map((e) => {
       return {
-        // res.send(
-        //   type.data.results.map((e) => {
-        //     return {
         id: e.id,
         title: e.title,
-        image: e.image,
-        vegetarian: e.vegetarian,
-        vegan: e.vegan,
-        glutenFree: e.glutenFree,
-        dietas: e.diets,
+        image: e.image,        
+        typeDiets: e.diets.map(e => e),
       };
     })
     // ); 
     const responseTotal = dbInfoQuery.concat(apiInfoQuery);
     const dataQuery = dbInfoQuery.concat(apiInfoQuery);
-    // if (responseTotal.length !== 0) {
-    //   res.status(400).send("entre a error");
-    // } else {
     res.status(200).send(dataQuery);
     // }
   } catch (error) {
     next(error);
   }
-
 });
 
 //***************        GET  QUERY   LISTO    ***************************************************** */
@@ -142,7 +128,7 @@ router.get("/recipes", async (req, res) => {
   // res.send(dbInfoQuery)
   // try {
   let recipes = await axios.get(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key2}&addRecipeInformation=true&number=100&query=${title}`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100&query=${title}`
   );
   apiInfoQuery = await recipes.data.results.map((e) => {
     return {
@@ -152,7 +138,7 @@ router.get("/recipes", async (req, res) => {
       vegetarian: e.vegetarian,
       vegan: e.vegan,
       glutenFree: e.glutenFree,
-      dietas: e.diets,
+      typeDiets: e.diets.map((e) => e),
     };
   });
   //  res.send(apiInfoQuery);
@@ -179,7 +165,7 @@ router.get("/recipes/:id", async (req, res, next) => {
     if (!verifId.test(id)) {
       let apiInfoDetail = {};
       let response = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_Key2}`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_temp}`
       );
       let apiIdInfo2 = response.data;
       apiInfoDetail = {
@@ -190,7 +176,7 @@ router.get("/recipes/:id", async (req, res, next) => {
         vegetarian: apiIdInfo2.vegetarian,
         vegan: apiIdInfo2.vegan,
         glutenFree: apiIdInfo2.glutenFree,
-        diets: apiIdInfo2.diets,
+        typeDiets: apiIdInfo2.diets.map((e) => e),
         aggregateLikes: apiIdInfo2.aggregateLikes,
         healthScore: apiIdInfo2.healthScore,
         instructions: apiIdInfo2.instructions,
@@ -203,8 +189,8 @@ router.get("/recipes/:id", async (req, res, next) => {
       res.send(dbInfoDetail);
     }
   } catch (error) {
-    res.status(400).send("error");
-    //  next()
+    // res.status(400).send("error");
+     next(error)
   }
 });
 
@@ -214,8 +200,8 @@ router.get("/recipes/:id", async (req, res, next) => {
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // CREA  una receta en la base de datos
 router.post("/recipe", async (req, res, next) => {
-  let { title, summary, aggregateLikes, healthScore, instructions, diets } = req.body;
-
+  let { title, summary, aggregateLikes, healthScore, instructions, diets, image } = req.body;
+  let typeDiets = diets
   try {
     // CARGO LA BD CON LOS TYPES DE DIETAS
     const recipe = await Recipe.create({
@@ -224,16 +210,17 @@ router.post("/recipe", async (req, res, next) => {
       aggregateLikes,
       healthScore,
       instructions,
-      diets,
-      image: "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png",
+      typeDiets,
+      // image: "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png",
+      image,
     })
 
     // // BUSCO EN LA DB LA DIETA PARA ASOCIARSELA A LA RECETA
     const dietDb = await TypeDiet.findAll({
-      where: { title: diets },
+      where: { title: typeDiets },
     })
     // AGREGO LA DIETA A LA RECETA EN LA DB
-    console.log(dietDb);
+    // console.log(dietDb);
     //  ASOCIO LA TABLA INTERMEDIA
     await recipe.addTypeDiet(dietDb);
 
@@ -244,6 +231,7 @@ router.post("/recipe", async (req, res, next) => {
     next(error);
   }
 });
+
 
 
 module.exports = router;

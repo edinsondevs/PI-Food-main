@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
-  // defino el modelo
+  // defino el modelo 
   sequelize.define('recipe', {
     id:{
       type: DataTypes.UUID,
@@ -28,27 +28,17 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     image: {
-      type: DataTypes.STRING,
+      // type: DataTypes.STRING(12345),
+      type: DataTypes.TEXT,
+      defaultValue: 'https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png',
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,
       allowNull:false,
-      defaultValue: true,
+      defaultValue: true, 
     }
   },{
     createdAt: false,
     updatedAt: false
   });
 };
-
-/**
-El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterisco deben ser obligatorias):
-
-ID: *
-Nombre * :    name
-Resumen del plato * :   summary 
-Puntuación :        aggregateLikes
-Nivel de "comida saludable" :  healthScore
-Paso a paso :     instructions
-
- */
