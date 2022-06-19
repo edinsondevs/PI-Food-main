@@ -7,6 +7,7 @@ import Pagginate from '../Components/Paginado.jsx';
 import { SearchBar } from '../Components/SearchBar'
 import { RecipeCreate } from '../Components/RecipeCreate.jsx';
 import { Loading } from '../Components/Loading.jsx';
+import '../Components/Styles/Home.css';
 
 
 export const Home = () => {
@@ -47,21 +48,29 @@ export const Home = () => {
         setCurrentPage(1)
         setOrden(`Ordenado ${e.target.value}`)
     }
-
+console.log(allRecipes);
     return (
         <>
             <div>
                 {/* <Link to="/recipes">Ver recetas</Link> */}
+                {/* <h1>Pagina de Recetas</h1> */}
                 <Link to="/create" >Crear Recetas</Link>
-                <h1>Pagina de Recetas</h1>
                 <button onClick={(e) => handleClick(e)}>
                     Volver a Cargar todas las Recetas
                 </button>
                 <div>
+                    <SearchBar />
+                </div>
+                <div className="cmp-home-container">
+                    <div>
+                    <h3>Ordena por Alfabeto: </h3>
                     <select onChange={(e) => handleSort(e)}>
                         <option value="asc">Ascendente</option>
                         <option value="desc">Descendente</option>
                     </select>
+                    </div>
+                    <div>
+                        <h3>Tipo de Dieta: </h3>
                     <select onChange={(e) => handleFilter(e)}>
                         <option value="vegan">Vegana</option>
                         <option value="vegetarian">Vegetariano</option>
@@ -75,13 +84,22 @@ export const Home = () => {
                         <option value="low">Low FODMAP</option>
                         <option value="whole30">Whole30</option>
                     </select>
+                    </div>
+                    <div>
+                    <h3>Ordena por Puntuacion: </h3>
+                    <select onChange={(e) => handleSort(e)}>
+                        <option value="asc">Ascendente</option>
+                        <option value="desc">Descendente</option>
+                    </select>
+                    </div>
                 </div>
-                <div>
-                    <SearchBar />
-                </div>
+              
             </div>
             <div >
                 <Pagginate recipesPerPage={recipesPerPage} allRecipes={allRecipes} pagginate={pagginate} />
+                {currentRecipes.length === 0 &&
+                    <Loading />
+                }
                 <div className="cmp-cards">
                     {currentRecipes &&
                         currentRecipes.map((e) => {
@@ -89,13 +107,10 @@ export const Home = () => {
                                 <Link to={`/recipes/${e.id}`} key={e.id}>
                                     <Card key={e.id} title={e.title} image={e.image} typeDiets={e.typeDiets} />
                                 </Link>
-                            )
+                            )                            
                         })
                     }
                 </div>
-                {currentRecipes.length === 0 &&
-                    <Loading />
-                }
             </div>
         </>
     );

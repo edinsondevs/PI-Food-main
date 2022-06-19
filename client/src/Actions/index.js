@@ -27,6 +27,14 @@ export const orderByName = (payload) => {
     }
 }
 
+export const orderByLikes = (payload) => {
+
+    return {
+        type: 'ORDER_BY_LIKES',
+        payload
+    }
+}
+
 export const getNameRecipes = (payload) => {
 
     return async function (dispatch) {

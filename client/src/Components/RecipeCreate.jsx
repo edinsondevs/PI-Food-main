@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { Fragment, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewRecipe } from "../Actions";
@@ -25,7 +25,7 @@ export const RecipeCreate = () => {
     // })
     const [name, setName] = useState('');
     const [error, setError] = useState('');
-    
+
     function validateName(value) {
         if (/[^A-Za-z]/.test(value)) {
             setError('El nombre no debe poseer numeros ni caracteres especiales');
@@ -36,47 +36,40 @@ export const RecipeCreate = () => {
     }
 
     return (
-        <div> 
+        <div>
             <Link to="/home">Volver</Link>
             <h1>Crear una Receta</h1>
+            {/* <div className="cmp-form-container"> */}
+            <form className="cmp-form" action="">
+                <label for="title">Titulo</label>
+                <input type="text" id="title" name="title" onChange={(e) => validateName(e.target.value)} placeholder="Ingrese nombre de la receta" />
+                {!error ? null :
+                    <span>{error}</span>
+                }
+                {/* <div> */}
+                <label for="summary">Resumen</label>
+                <textarea name="summary" id="" cols="30" rows="10"></textarea>
+                {/* </div> */}
+                <label for="instructions">Instrucciones</label>
+                <textarea name="instructions" id="" cols="30" rows="10"></textarea>
+                <label for="aggregateLikes">Puntuacion del plato</label>
+                <input type="number" name="aggregateLikes" placeholder="Puntuacion máx 9" />
+                
+                <label for="healthScore">Puntuacion de la salud</label>
+                <input type="number" name="healthScore" />
+                
+                <label for="typeRecipe">Tipo de Dieta</label>
+                <select name="typeRecipe" id="typeRecipe">
+                    <option value="vegan">Vegana</option>
+                    <option value="vegetarian">Vegetariana</option>
+                    <option value="glutenFree">Sin gluten</option>
+                </select >
 
-            <form action="">
-                <div>
-                    <label>Titulo</label>
-                    <input type="text" name="title" onChange={(e) => validateName(e.target.value)}/>
-                    {!error ? null : <span>{error}</span>}
-                </div>
-                <div>
-                    <label>Resumen del plato</label>
-                    <textarea name="summary" id="" cols="30" rows="10"></textarea>
-                </div>
-                <div>
-                    <label htmlFor="">Puntuacion del plato</label>
-                    <input type="number" name="aggregateLikes" />
-                </div>
-                <div>
-                    <label htmlFor="">Puntuacion de la salud</label>
-                    <input type="number" name="healthScore" />
-                </div>
-                <div>
-                    <label htmlFor="">Instrucciones</label>
-                    <textarea name="instructions" id="" cols="30" rows="10"></textarea>
-                </div>
-                <div>
-                    <label>Seleccione el tipo de Dieta</label>
-                    <select name="typeRecipe" id="">
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                    </select>
-                </div>
-                <div>
-                    <label>Imagen: </label>
-                    <input type="text" name="image" />
-                </div>
-                <button type="submit">Crear</button>
+                <label for="image">Imagen</label>
+                <input type="text" name="image" placeholder="Ingrese url de la imagen..."/>
+                <button type="submit">Crear</button>               
             </form>
+            {/* </div> */}
         </div>
     )
 }

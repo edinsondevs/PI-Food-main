@@ -6,7 +6,7 @@ const { Recipe, TypeDiet } = require("../db.js");
 const { API_temp } = process.env; //    CAMBIAR EN TODOS LOS FETCH EL NOMBRE HASTA API_temp  si se bloquea la API por consultas
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
- 
+
 const router = Router();
 
 
@@ -47,11 +47,11 @@ const getDb = async () => {
 };
 
 //***************************************       BUSQUEDA DE TIPOS DE DIETAS
-  const getAllDiets = async () => {
+const getAllDiets = async () => {
   const getApiInfo = await getApi();
   const getDbInfo = await getDb();
   const infoTotal = getApiInfo.concat(getDbInfo);
-  return infoTotal; 
+  return infoTotal;
 };
 
 //************************************************************************************************************************************************************************************ */
@@ -90,7 +90,7 @@ router.get("/prueba", async (req, res, next) => {
 router.get("/types", async (req, res, next) => {
   // CONSULTO LA BD CON LOS TYPES DE DIETAS  
   const dbInfo = await getDb();
-  let dbInfoQuery = await dbInfo.filter((e) => e );
+  let dbInfoQuery = await dbInfo.filter((e) => e);
 
   try {
     const type = await axios.get(
@@ -100,7 +100,7 @@ router.get("/types", async (req, res, next) => {
       return {
         id: e.id,
         title: e.title,
-        image: e.image,        
+        image: e.image,
         typeDiets: e.diets.map(e => e),
       };
     })
@@ -122,7 +122,7 @@ router.get("/recipes", async (req, res) => {
   let title = req.query.name;
   const dbInfo = await getDb();
   let dbInfoQuery = await dbInfo.filter((e) =>
-    e.title.toLowerCase().includes(title.toLowerCase()) 
+    e.title.toLowerCase().includes(title.toLowerCase())
   );
 
   // res.send(dbInfoQuery)
@@ -189,8 +189,7 @@ router.get("/recipes/:id", async (req, res, next) => {
       res.send(dbInfoDetail);
     }
   } catch (error) {
-    // res.status(400).send("error");
-     next(error)
+    next(error)
   }
 });
 
@@ -211,10 +210,8 @@ router.post("/recipe", async (req, res, next) => {
       healthScore,
       instructions,
       typeDiets,
-      // image: "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png",
       image,
     })
-
     // // BUSCO EN LA DB LA DIETA PARA ASOCIARSELA A LA RECETA
     const dietDb = await TypeDiet.findAll({
       where: { title: typeDiets },
@@ -223,10 +220,7 @@ router.post("/recipe", async (req, res, next) => {
     // console.log(dietDb);
     //  ASOCIO LA TABLA INTERMEDIA
     await recipe.addTypeDiet(dietDb);
-
     res.send("Personaje creado correctamente");
-
-    // res.json(recipe);
   } catch (error) {
     next(error);
   }
