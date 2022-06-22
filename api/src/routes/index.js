@@ -14,7 +14,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);[]
 
 //************************************************************************************************************************************************************************************ */
-//                                                                  CONSULTAS PRINCIPALES
+//                                                           FUNCIONES DE CONSULTAS PRINCIPALES
 //************************************************************************************************************************************************************************************ */
 //************************************            CONSULTA A LA API
 const getApi = async () => {
@@ -54,16 +54,15 @@ const getAllDiets = async () => {
   return infoTotal;
 };
 
-//************************************************************************************************************************************************************************************ */
-//                                                                  GET
-//******************            PRUEBA                              ********************** */
+/************************************************************************************************************************************************************************************
+                                                                  GET
+******************            PRUEBA                              ***********************/
 
 router.get("/prueba", async (req, res, next) => {
   // const printPrueba = []
   try {
     let prueba = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&number=2&addRecipeInformation=true`
-      //`https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese&X-RapidAPI-Key=135849fecfmsh0f019d564259576p172a81jsnea91d0f9816b`
     );
     const prueba2 = await prueba.data.results.map((e) => {
       return {
@@ -83,38 +82,35 @@ router.get("/prueba", async (req, res, next) => {
   }
 });
 
-//*************************************    GET TYPES  **************************** */
+
+// //*************************************    GET TYPES  **************************** */
 //    EXTRAE SOLO LOS DATOS NECESARIOS
-// Obtener TODOS los tipos de dieta posibles
-// En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
+//    Obtener TODOS los tipos de dieta posibles
+//    En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
 router.get("/types", async (req, res, next) => {
-  // CONSULTO LA BD CON LOS TYPES DE DIETAS  
-  const dbInfo = await getDb();
-  let dbInfoQuery = await dbInfo.filter((e) => e);
-
-  try {
-    const type = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`
-    );
-    apiInfoQuery = await type.data.results.map((e) => {
-      return {
-        id: e.id,
-        title: e.title,
-        image: e.image,
-        typeDiets: e.diets.map(e => e),
-      };
+  const typeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`);
+  const types = typeApi.data.results.map((e) => e.diets)
+  const typesEach = types.map((e) => {
+    for (let i = 0; i < e.length; i++) {
+      return e[i];
+    }
+  })
+  // console.log(typesEach);
+  //    CONSULTO LA BD CON LOS TYPES DE DIETAS Y SI NO EXISTEN LOS CREO  
+  typesEach.forEach(e => {
+    TypeDiet.findOrCreate({
+      where: { title: e }
     })
-    // ); 
-    const responseTotal = dbInfoQuery.concat(apiInfoQuery);
-    const dataQuery = dbInfoQuery.concat(apiInfoQuery);
-    res.status(200).send(dataQuery);
-    // }
-  } catch (error) {
-    next(error);
-  }
-});
+    .then(e => e)
+    .catch(e => e)
+  })
+  //    CONSULTO LA BD CON LOS TYPES DE DIETAS Y LOS MANDO COMO RESPUESTA
+  const allTypes = await TypeDiet.findAll();
+  res.status(200).send(allTypes);
+})
 
-//***************        GET  QUERY   LISTO    ***************************************************** */
+
+//***************        GET  QUERY   GET /recipes?name="...": ***************************************************** */
 // [ ] GET /recipes?name="...":
 // Obtener un LISTADO de las recetas QUE CONTENGAN LA PALABRA O NOMBRE como query parameter
 // Si no existe ninguna receta mostrar un mensaje adecuado
@@ -146,13 +142,13 @@ router.get("/recipes", async (req, res) => {
   const responseTotal = dbInfoQuery.concat(apiInfoQuery);
   const dataQuery = dbInfoQuery.concat(apiInfoQuery);
   if (responseTotal.length === 0) {
-    res.status(400).send("entre a error");
+    res.status(400).send("No existe ninguna receta con ese nombre");
   } else {
     res.status(200).send(dataQuery);
   }
 });
 
-//****************   GET DETALLE LISTO   ************************************ */
+//****************   GET DETALLE    GET /recipes/{idReceta}:  ************************************ */
 // [ ] GET /recipes/{idReceta}:
 // Obtener el DETALLE DE UNA RECETA en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de receta
@@ -193,9 +189,7 @@ router.get("/recipes/:id", async (req, res, next) => {
   }
 });
 
-//************************************************************************************************************************************************************************************ */
-//                                                                  POST
-//************************************************************************************************************************************************************************************ */
+//*********************       POST      POST /recipe:                  *************************************** */
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // CREA  una receta en la base de datos
 router.post("/recipe", async (req, res, next) => {
