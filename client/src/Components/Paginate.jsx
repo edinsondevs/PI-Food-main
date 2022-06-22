@@ -14,7 +14,7 @@ const Pagginate = ({recipesPerPage, allRecipes, pagginate}) => {
             { pageNumber &&             
             pageNumber.map(number => (
                     <li key={number}>                        
-                        <button onClick={()=>pagginate(number)}>{number}</button>
+                        <button className="btn-pagginate"  onClick={()=>pagginate(number)}>{number}</button>
                     </li>                
             ))
             }

@@ -54,60 +54,64 @@ const getAllDiets = async () => {
   return infoTotal;
 };
 
-/************************************************************************************************************************************************************************************
-                                                                  GET
-******************            PRUEBA                              ***********************/
-
-router.get("/prueba", async (req, res, next) => {
-  // const printPrueba = []
-  try {
-    let prueba = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&number=2&addRecipeInformation=true`
-    );
-    const prueba2 = await prueba.data.results.map((e) => {
-      return {
-        id: e.id,
-        image: e.image,
-        title: e.title,
-        vegetarian: e.vegetarian,
-        vegan: e.vegan,
-        glutenFree: e.glutenFree,
-        typeDiets: e.diets,
-      };
-    });
-    res.send(prueba2);
-    return prueba2;
-  } catch (error) {
-    next(error);
-  }
-});
-
 
 // //*************************************    GET TYPES  **************************** */
 //    EXTRAE SOLO LOS DATOS NECESARIOS
 //    Obtener TODOS los tipos de dieta posibles
 //    En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
+// router.get("/types", async (req, res, next) => {
+//   const typeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`);
+//   const types = typeApi.data.results.map((e) => e.diets)
+//   const typesEach = types.map((e) => {
+//     for (let i = 0; i < e.length; i++) {
+//       return e[i];
+//     }
+//   })
+//   // console.log(typesEach);
+//   //    CONSULTO LA BD CON LOS TYPES DE DIETAS Y SI NO EXISTEN LOS CREO  
+//   typesEach.forEach(e => {
+//     TypeDiet.findOrCreate({
+//       where: { title: e }
+//     })
+//     .then(e => e)
+//     .catch(e => e)
+//   })
+//   //    CONSULTO LA BD CON LOS TYPES DE DIETAS Y LOS MANDO COMO RESPUESTA
+//   const allTypes = await TypeDiet.findAll();
+//   res.status(200).send(allTypes);
+// })
+
+
+//*************************************    GET TYPES  **************************** */
+//    EXTRAE SOLO LOS DATOS NECESARIOS
+// Obtener TODOS los tipos de dieta posibles
+// En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
 router.get("/types", async (req, res, next) => {
-  const typeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`);
-  const types = typeApi.data.results.map((e) => e.diets)
-  const typesEach = types.map((e) => {
-    for (let i = 0; i < e.length; i++) {
-      return e[i];
-    }
-  })
-  // console.log(typesEach);
-  //    CONSULTO LA BD CON LOS TYPES DE DIETAS Y SI NO EXISTEN LOS CREO  
-  typesEach.forEach(e => {
-    TypeDiet.findOrCreate({
-      where: { title: e }
+  // CONSULTO LA BD CON LOS TYPES DE DIETAS  
+  const dbInfo = await getDb();
+  let dbInfoQuery = await dbInfo.filter((e) => e);
+
+  try {
+    const type = await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100`
+    );
+    apiInfoQuery = await type.data.results.map((e) => {
+      return {
+        id: e.id,
+        title: e.title,
+        image: e.image,
+        typeDiets: e.diets.map(e => e),
+      };
     })
-    .then(e => e)
-    .catch(e => e)
-  })
-  //    CONSULTO LA BD CON LOS TYPES DE DIETAS Y LOS MANDO COMO RESPUESTA
-  const allTypes = await TypeDiet.findAll();
-  res.status(200).send(allTypes);
-})
+    // ); 
+    const responseTotal = dbInfoQuery.concat(apiInfoQuery);
+    const dataQuery = dbInfoQuery.concat(apiInfoQuery);
+    res.status(200).send(dataQuery);
+    // }
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 //***************        GET  QUERY   GET /recipes?name="...": ***************************************************** */
@@ -116,35 +120,33 @@ router.get("/types", async (req, res, next) => {
 // Si no existe ninguna receta mostrar un mensaje adecuado
 router.get("/recipes", async (req, res) => {
   let title = req.query.name;
-  const dbInfo = await getDb();
-  let dbInfoQuery = await dbInfo.filter((e) =>
-    e.title.toLowerCase().includes(title.toLowerCase())
-  );
-
-  // res.send(dbInfoQuery)
-  // try {
+  const allDiets = await getAllDiets(); 
+  console.log(title);
+  const dbInfo = await getDb(); 
+  
   let recipes = await axios.get(
     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100&query=${title}`
-  );
+    );
+    
+    if (title) {
+    let dbInfoQuery = await dbInfo.filter((e) =>
+      e.title.toLowerCase().includes(title.toLowerCase()));
   apiInfoQuery = await recipes.data.results.map((e) => {
     return {
-      id: e.id,
-      image: e.image,
-      title: e.title,
-      vegetarian: e.vegetarian,
-      vegan: e.vegan,
-      glutenFree: e.glutenFree,
+      id: e.id, image: e.image, title: e.title, vegetarian: e.vegetarian, vegan: e.vegan, glutenFree: e.glutenFree,
       typeDiets: e.diets.map((e) => e),
     };
   });
   //  res.send(apiInfoQuery);
-
   const responseTotal = dbInfoQuery.concat(apiInfoQuery);
   const dataQuery = dbInfoQuery.concat(apiInfoQuery);
-  if (responseTotal.length === 0) {
+  if (dataQuery.length === 0) {
     res.status(400).send("No existe ninguna receta con ese nombre");
   } else {
     res.status(200).send(dataQuery);
+  }
+  } else {
+    res.status(200).send(allDiets)
   }
 });
 

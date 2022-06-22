@@ -1,8 +1,11 @@
 const initialState = {
     recipes: [],
-    typeDiets: []
+    typeDiets: [],
+    details: [],
+    recipesOrderLikes: [],
+
 }
- 
+
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'GET_RECIPES':         // GET_RECIPES
@@ -12,73 +15,89 @@ export default function rootReducer(state = initialState, action) {
             }
         case 'GET_TYPE_RECIPES':
             const allRecipes = state.recipes
-            const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)            
+            // const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)
             return {
                 ...state,
-                recipes: typeRecipes
+                recipes: allRecipes
             }
-            
+        // case 'GET_TYPE_RECIPES':
+        //     const allRecipes = state.recipes
+        //     const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)
+        //     return {
+        //         ...state,
+        //         recipes: typeRecipes
+        //     }
+
+        // ORDENAMIENTO POR NOMBRE
         case 'ORDER_BY_NAME':
-            
-            let sortArr = action.payload === 'asc' ? 
-            state.recipes.sort(function(a, b) {
-                    if (a.title > b.title){
-                    return 1
-                }
-                if (a.title < b.title){
-                    return -1
-                }
-                return 0
-                }) : state.recipes.sort(function(a, b) {
-                    if (a.title > b.title){
-                    return -1
-                }
-                if (a.title < b.title){
-                    return 1
-                }
-                return 0
+            let sortArr = action.payload === 'asc' ?
+                state.recipes.sort(function (a, b) {
+                    if (a.title > b.title) {
+                        return -1
+                    }
+                    if (a.title < b.title) {
+                        return 1
+                    }
+                    return 0
+                }) : state.recipes.sort(function (a, b) {
+                    if (a.title > b.title) {
+                        return 1
+                    }
+                    if (a.title < b.title) {
+                        return -1
+                    }
+                    return 0
                 })
-                console.log(sortArr);
+            console.log(sortArr);
             return {
                 ...state,
                 recipes: sortArr
             }
 
-            case 'ORDER_BY_LIKES':
-            
-            let sortArrLikes = action.payload === 'asc' ? 
-            state.recipes.sort(function(a, b) {
-                    if (a.title > b.title){
-                    return 1
-                }
-                if (a.title < b.title){
-                    return -1
-                }
-                return 0
-                }) : state.recipes.sort(function(a, b) {
-                    if (a.title > b.title){
-                    return -1
-                }
-                if (a.title < b.title){
-                    return 1
-                }
-                return 0
+        // ORDENAMIENTO POR LIKES
+        case 'ORDER_BY_LIKES':
+            let sortArrLikes = action.payload === 'asc' ?
+                state.recipes.sort(function (a, b) {
+                    if (a.aggregateLikes > b.aggregateLikes) {
+                        return -1
+                    }
+                    if (a.aggregateLikes < b.aggregateLikes) {
+                        return 1
+                    }
+                    return 0
+                }) :
+                state.recipes.sort(function (a, b) {
+                    if (a.aggregateLikes > b.aggregateLikes) {
+                        return 1
+                    }
+                    if (a.aggregateLikes < b.aggregateLikes) {
+                        return -1
+                    }
+                    return 0
                 })
-                // console.log(sortArr);
+            // console.log(sortArrLikes);
             return {
                 ...state,
-                recipes: sortArrLikes
+                recipesOrderLikes: sortArrLikes
             }
 
+        // BUSQUEDA POR NOMBRE
         case 'GET_NAME_RECIPES':
             return {
                 ...state,
                 recipes: action.payload
             }
-            
+
+        case 'GET_RECIPES_BY_ID':
+            return {
+                ...state,
+                details: action.payload
+            }
+
+
         case 'POST_NAME_RECIPES':
             return {
-                ...state,             
+                ...state,
             }
 
 

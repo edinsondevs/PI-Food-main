@@ -1,40 +1,82 @@
-
-
-body {
-    /* background: url('https://i.pinimg.com/originals/1a/45/1c/1a451c2844826c3691ee80512e9e1166.jpg'); */
+/* body { */
+/* background: url('https://i.pinimg.com/originals/1a/45/1c/1a451c2844826c3691ee80512e9e1166.jpg'); */
 /* background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fback_origin_pic%2F04%2F62%2F17%2Fba5b34a44659a0723ad7c7b6d739d084.jpg&f=1&nofb=1'); */
-background-size: cover;
+/* background-size: cover; */
+/* } */
+
+.grid {
+    display: grid;
+    /* grid-template-columns: minmax(200px, 250px); */
+    grid-template-columns: 250px 50px;
+    grid-template-rows: 450px;
+    /* grid-template-rows: minmax(100px, 450px); */
+    padding-bottom: 20px;
+    align-items: stretch;
+    position: relative;
+    margin: 40px auto;
 }
 
-            
-.cmp-card{
-    display: flex;
-    flex-direction: column;
+.grid>article {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 1.5);
+    align-content: space-between;
+    display: grid;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    word-wrap: break-word ;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #000;    
-    transition: all 0.3s ease-in-out;
+    justify-items: center;
+    align-items: baseline
+}
+
+.grid>article img {
+    /* max-width: 100%; */
+    width: 250px;
+    height: 200px;
+}
+
+.text {
+    padding: 0px 20px 20px;
+    position: relative;
+    /* color: rgb(255, 255, 255); */
+}
+
+.btn-link {
+    background: darkkhaki;
+    text-decoration: none;
+    border: 0;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    width: 10rem;
+    margin-bottom: 1rem;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     
 }
 
-.container{    
-    display: flex;
-    flex-wrap: wrap;    
-    justify-content: center;
-    color: #fff;    
-    width: 350px;
-    height: 350px;
-    padding: 10px
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /* border-bottom: 1px dotted rgb(129, 120, 120); */
+    /* If you want dots under the hoverable text */
 }
 
-.img-card {
-    width: 250px;    
-    height: 200px;    
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #000;
-    position: relative;
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: rgba(12, 12, 12, 0.807);
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+
+    /* Position the tooltip text - see examples below! */
+    width: 100%;
+    top: 100%;
+    left: 50%;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

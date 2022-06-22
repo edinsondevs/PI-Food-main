@@ -1,14 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { getNewRecipe } from "../Actions";
+import { getNewRecipe, getTypeRecipes } from "../Actions";
 import '../Components/Styles/RecipeCreate.css'
 
 
 export const RecipeCreate = () => {
     const dispatch = useDispatch();
     const allRecipes = useSelector(state => state.recipes);
-
+    const typeDiets = useSelector(state => state.typeDiets);
+    const typeRecipes = useSelector(state => state.typeRecipes);
 
     const [input, setInput] = useState({
         title: '',
@@ -17,22 +18,42 @@ export const RecipeCreate = () => {
         healthScore: '',
         instructions: '',
         image: '',
-        typeDiets: []
+        diets: []
     })
 
-    // useEffect(() => {
-    //     dispatch(getNewRecipe());
-    // })
+    useEffect(() => {
+        dispatch(getTypeRecipes())
+    },[dispatch])
+
     const [name, setName] = useState('');
     const [error, setError] = useState('');
+    const [likes, setLikes] = useState('');
+    const [range, setRange] = useState('');
+
 
     function validateName(value) {
+        if (/[^A-Za-z]/.test(value)) {
+            setError('El nombre no debe poseer numeros ni caracteres especiales');
+        } 
+        setName(value);
+    }
+
+    function validateLikes(value) {
+        if (/[1-9]/.test(value)) {
+            setError('El numero debe ser entre 1-9');
+        } else {
+            setError('');
+        }
+        setLikes(value);
+    }
+
+    function validateRange(value) {
         if (/[^A-Za-z]/.test(value)) {
             setError('El nombre no debe poseer numeros ni caracteres especiales');
         } else {
             setError('');
         }
-        setName(value);
+        setRange(value);
     }
 
     return (
@@ -41,31 +62,36 @@ export const RecipeCreate = () => {
             <h1>Crear una Receta</h1>
             {/* <div className="cmp-form-container"> */}
             <form className="cmp-form" action="">
-                <label for="title">Titulo</label>
+                <label htmlFor="title">Titulo</label>
                 <input type="text" id="title" name="title" onChange={(e) => validateName(e.target.value)} placeholder="Ingrese nombre de la receta" />
                 {!error ? null :
                     <span>{error}</span>
                 }
                 {/* <div> */}
-                <label for="summary">Resumen</label>
+                <label htmlFor="summary">Resumen</label>
                 <textarea name="summary" id="" cols="30" rows="10"></textarea>
                 {/* </div> */}
-                <label for="instructions">Instrucciones</label>
+                <label htmlFor="instructions">Instrucciones</label>
                 <textarea name="instructions" id="" cols="30" rows="10"></textarea>
-                <label for="aggregateLikes">Puntuacion del plato</label>
-                <input type="number" name="aggregateLikes" placeholder="Puntuacion máx 9" />
+                <label htmlFor="aggregateLikes">Puntuacion del plato</label>
+                <input type="number" name="aggregateLikes" placeholder="Puntuacion máx 9" onChange={(e) => validateLikes(e.target.value)}/>
                 
-                <label for="healthScore">Puntuacion de la salud</label>
-                <input type="number" name="healthScore" />
-                
-                <label for="typeRecipe">Tipo de Dieta</label>
+                <label htmlFor="healthScore">Puntuacion de la salud</label>
+                <input type="number" name="healthScore" onChange={(e) => validateRange(e.target.value)}/>
+             
+                <label htmlFor="typeRecipe">Tipo de Dieta</label>
                 <select name="typeRecipe" id="typeRecipe">
-                    <option value="vegan">Vegana</option>
+                    {console.log(typeRecipes)}
+                    {typeDiets.map(e=>
+                        // <option key={e.id} value={e.id}>{e.name}</option>
+                        console.log(typeDiets)
+                        )}
+                    {/* <option value="vegan">Vegana</option>
                     <option value="vegetarian">Vegetariana</option>
-                    <option value="glutenFree">Sin gluten</option>
+                    <option value="glutenFree">Sin gluten</option> */}
                 </select >
 
-                <label for="image">Imagen</label>
+                <label htmlFor="image">Imagen</label>
                 <input type="text" name="image" placeholder="Ingrese url de la imagen..."/>
                 <button type="submit">Crear</button>               
             </form>

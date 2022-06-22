@@ -1,0 +1,12 @@
+
+.cmp-container-detail {
+    border: 1px solid rgb(193, 10, 10);
+    position: absolute;
+    padding-top: 2rem;
+}
+
+.cmp-detail-img{
+    width: 250px;
+    height: 200px;
+    padding: 1rem;
+}

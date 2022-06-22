@@ -1,0 +1,29 @@
+.cmp-searchbar{
+    padding: 0px;
+    margin: 0px;
+}
+.btn-searchbar{
+    border: 0px solid;
+    color: white;
+    /* background: darkkhaki; */
+    /* background-color: antiquewhite; */
+    text-align: center;
+    padding: 14px 16px;
+    min-height: 45px;
+    text-decoration: none;
+}
+
+.btn-searchbar:hover{
+    color: rgb(255, 255, 255);
+    padding: 14px 16px;
+    height: 100%;
+    background: black;
+}
+
+input {
+    color: rgb(8, 8, 8);
+    /* padding: 14px 16px; */
+    min-width: 200px;
+    min-height: 45px;
+    font-size: 0.8rem;
+}

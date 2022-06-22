@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getNameRecipes } from "../Actions/index"
+import './Styles/SearchBar.css'
 
 export const SearchBar = () => {
     const dispatch = useDispatch();
@@ -10,17 +11,18 @@ export const SearchBar = () => {
         e.preventDefault();
         setName(e.target.value);   
     }
-    
-    
+
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(getNameRecipes(name));        
+        dispatch(getNameRecipes(name)); 
+        setName('')   ;
+        // console.log(name)    
     }
     return (
-        <div>
-            <input type="text" placeholder="Buscar" value={name}  onChange={handleInputName} />
+        <div className="cmp-searchbar">
+            <input type="text" placeholder="Ingrese ingrediente..." value={name}  onChange={handleInputName} />
             {/* {console.log(name)}; */}
-            <button type="submit" onClick={handleSubmit}>Buscar</button>
+            <button className="btn-searchbar" onClick={handleSubmit}>Buscar</button>
         </div>
     )
 }
