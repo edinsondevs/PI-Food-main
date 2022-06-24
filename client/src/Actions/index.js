@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getRecipes = () => {
     return async (dispatch) => {
-        var json = await axios.get('http://localhost:3001/recipes');
+        let json = await axios.get('http://localhost:3001/recipes');
         return dispatch({
             type: 'GET_RECIPES',
             payload: json.data
@@ -12,15 +12,17 @@ export const getRecipes = () => {
 }
 
 export const getTypeRecipes = (payload) => {
-
-    return {
-        type: 'GET_TYPE_RECIPES',
-        payload
+    // console.log(payload)
+    return async function (dispatch) {
+        // let json = await axios.get('http://localhost:3001/types');
+        return dispatch({
+            type: 'GET_TYPE_RECIPES',
+            payload
+        })
     }
 }
 
 export const orderByName = (payload) => {
-
     return {
         type: 'ORDER_BY_NAME',
         payload
@@ -28,20 +30,17 @@ export const orderByName = (payload) => {
 }
 
 export const orderByLikes = (payload) => {
-    return async (dispatch) => {
-        // var json = await axios.get('http://localhost:3001/recipes');
-        return dispatch({ 
+            return{
             type: 'ORDER_BY_LIKES',
-            payload 
-            // data: json.data
-        })
-    }
+            payload, 
+        }
+    
 }
 
 export const getNameRecipes = (payload, next) => {
     // console.log(payload)
     return async function (dispatch) {
-        var json = await axios.get('http://localhost:3001/recipes?name=' + payload);
+        let json = await axios.get('http://localhost:3001/recipes?name=' + payload);
         try {
             return dispatch({
                 type: 'GET_NAME_RECIPES',
@@ -55,7 +54,7 @@ export const getNameRecipes = (payload, next) => {
 // BUSQUEDA POR ID
 export const getRecipesById = (id) => {
     return async function (dispatch) {
-        var json = await axios.get('http://localhost:3001/recipes/' + id);
+        let json = await axios.get('http://localhost:3001/recipes/' + id);
         return dispatch({
             type: 'GET_RECIPES_BY_ID',
             payload: json.data
@@ -67,7 +66,7 @@ export const getRecipesById = (id) => {
 // CREACION DE RECETA
 export const postNewRecipe = (payload) => {
     return async function (dispatch) {
-        var json = await axios.post('http://localhost:3001/recipe', payload);
+        let json = await axios.post('http://localhost:3001/recipe', payload);
         console.log(json);
         return json
     }

@@ -2,7 +2,7 @@ const initialState = {
     recipes: [],
     typeDiets: [],
     details: [],
-    recipesOrderLikes: [],
+    recipesOrderLikes: [], 
 
 }
 
@@ -14,43 +14,44 @@ export default function rootReducer(state = initialState, action) {
                 recipes: action.payload
             }
         case 'GET_TYPE_RECIPES':
-            const allRecipes = state.recipes
+
+            const type = state.recipes
+            // console.log(type)
+            let typeRecipe = action.payload
+            // console.log(typeRecipe)
+            const typeFilter = type.filter(e => e.typeDiets.includes(typeRecipe))
+            // console.log(typeFilter)
             // const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)
             return {
                 ...state,
-                recipes: allRecipes
+                recipes: typeFilter
             }
-        // case 'GET_TYPE_RECIPES':
-        //     const allRecipes = state.recipes
-        //     const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)
-        //     return {
-        //         ...state,
-        //         recipes: typeRecipes
-        //     }
+            
 
         // ORDENAMIENTO POR NOMBRE
         case 'ORDER_BY_NAME':
+            // console.log(state.recipes)
             let sortArr = action.payload === 'asc' ?
-                state.recipes.sort(function (a, b) {
+            state.recipes.sort(function (a, b) {
                     if (a.title > b.title) {
-                        return -1
+                        return 1
                     }
                     if (a.title < b.title) {
-                        return 1
+                        return -1
                     }
                     return 0
                 }) : state.recipes.sort(function (a, b) {
                     if (a.title > b.title) {
-                        return 1
+                        return -1
                     }
                     if (a.title < b.title) {
-                        return -1
+                        return 1
                     }
                     return 0
                 })
-            console.log(sortArr);
+            // console.log(sortArr);
             return {
-                ...state,
+                // ...state,
                 recipes: sortArr
             }
 
@@ -59,26 +60,26 @@ export default function rootReducer(state = initialState, action) {
             let sortArrLikes = action.payload === 'asc' ?
                 state.recipes.sort(function (a, b) {
                     if (a.aggregateLikes > b.aggregateLikes) {
-                        return -1
+                        return 1
                     }
                     if (a.aggregateLikes < b.aggregateLikes) {
-                        return 1
+                        return -1
                     }
                     return 0
                 }) :
                 state.recipes.sort(function (a, b) {
                     if (a.aggregateLikes > b.aggregateLikes) {
-                        return 1
+                        return -1
                     }
                     if (a.aggregateLikes < b.aggregateLikes) {
-                        return -1
+                        return 1
                     }
                     return 0
                 })
             // console.log(sortArrLikes);
             return {
-                ...state,
-                recipesOrderLikes: sortArrLikes
+                // ...state,
+                recipes: sortArrLikes
             }
 
         // BUSQUEDA POR NOMBRE

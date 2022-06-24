@@ -11,7 +11,6 @@ import '../Components/Styles/Home.css';
 
 
 export const Home = () => {
-
     const dispatch = useDispatch();
     const allRecipes = useSelector(state => state.recipes);
     const [orden, setOrden] = useState('')
@@ -39,6 +38,7 @@ export const Home = () => {
 
     function handleFilter(e) {
         e.preventDefault();
+        
         dispatch(getTypeRecipes(e.target.value));
     }
 
@@ -74,31 +74,32 @@ export const Home = () => {
                     <div>
                         <h3>Ordena por Alfabeto: </h3>
                         <select onChange={(e) => handleSort(e)}>
-                            <option value="asc">Ascendente</option>
-                            <option value="desc">Descendente</option>
+                            <option value="asc">A-Z</option>
+                            <option value="desc">Z-A</option>
                         </select>
                     </div>
                     <div>
                         <h3>Tipo de Dieta: </h3>
                         <select onChange={(e) => handleFilter(e)}>
                             <option value="vegan">Vegana</option>
-                            <option value="vegetarian">Vegetariano</option>
-                            <option value="glute free">Gluten Free</option>
-                            <option value="vetogenic">Ketogenic</option>
-                            <option value="lacto">Lacto-Vegetarian</option>
-                            <option value="ovo">Ovo-Vegetarian</option>
-                            <option value="pescetarian">Pescetarian</option>
-                            <option value="paleo">Paleo</option>
+                            <option value="lacto ovo vegetarian">Vegetariano</option>
+                            <option value="gluten free">Gluten Free</option>
+                            <option value="ketogenic">Ketogenic</option>
+                            <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
+                            <option value="lacto ovo vegetarian">Ovo-Vegetarian</option>
+                            <option value="pescatarian">Pescetarian</option>
+                            <option value="paleolithic">Paleo</option>
                             <option value="primal">Primal</option>
-                            <option value="low">Low FODMAP</option>
-                            <option value="whole30">Whole30</option>
+                            <option value="fodmap friendly">Low FODMAP</option>
+                            <option value="whole 30">Whole30</option>
+                            <option value="dairy free">Dairy Free</option>
                         </select>
                     </div> 
                     <div>
                         <h3>Ordena por Puntuacion: </h3>
                         <select onChange={(e) => handleLikes(e)}>
-                            <option value="asc">Ascendente</option>
-                            <option value="desc">Descendente</option>
+                            <option value="asc">Min-Max</option>
+                            <option value="desc">Max-Min</option>
                         </select>
                     </div>
                 </div>

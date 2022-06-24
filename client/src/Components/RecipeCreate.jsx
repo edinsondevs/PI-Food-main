@@ -9,7 +9,8 @@ export const RecipeCreate = () => {
     const dispatch = useDispatch();
     const allRecipes = useSelector(state => state.recipes);
     const typeDiets = useSelector(state => state.typeDiets);
-    const typeRecipes = useSelector(state => state.typeRecipes);
+
+    console.log(typeDiets)
 
     const [input, setInput] = useState({
         title: '',
@@ -18,12 +19,12 @@ export const RecipeCreate = () => {
         healthScore: '',
         instructions: '',
         image: '',
-        diets: []
+        typeDiets: []
     })
 
     useEffect(() => {
         dispatch(getTypeRecipes())
-    },[dispatch])
+    }, [dispatch])
 
     const [name, setName] = useState('');
     const [error, setError] = useState('');
@@ -34,7 +35,7 @@ export const RecipeCreate = () => {
     function validateName(value) {
         if (/[^A-Za-z]/.test(value)) {
             setError('El nombre no debe poseer numeros ni caracteres especiales');
-        } 
+        }
         setName(value);
     }
 
@@ -55,6 +56,7 @@ export const RecipeCreate = () => {
         }
         setRange(value);
     }
+    // console.log(typeDiets.map(e=>e.title))
 
     return (
         <div>
@@ -63,37 +65,35 @@ export const RecipeCreate = () => {
             {/* <div className="cmp-form-container"> */}
             <form className="cmp-form" action="">
                 <label htmlFor="title">Titulo</label>
-                <input type="text" id="title" name="title" onChange={(e) => validateName(e.target.value)} placeholder="Ingrese nombre de la receta" />
+                <input type="text" id="title" value={input.title} name="title" onChange={(e) => validateName(e.target.value)} placeholder="Ingrese nombre de la receta" />
                 {!error ? null :
                     <span>{error}</span>
                 }
-                {/* <div> */}
                 <label htmlFor="summary">Resumen</label>
-                <textarea name="summary" id="" cols="30" rows="10"></textarea>
-                {/* </div> */}
+
+                {/* <input type="text" name="summary" id="summary" value={input.summary}/> */}
+
                 <label htmlFor="instructions">Instrucciones</label>
-                <textarea name="instructions" id="" cols="30" rows="10"></textarea>
+                <textarea name="instructions" id="instructions" cols="30" rows="10"></textarea>
+
                 <label htmlFor="aggregateLikes">Puntuacion del plato</label>
-                <input type="number" name="aggregateLikes" placeholder="Puntuacion máx 9" onChange={(e) => validateLikes(e.target.value)}/>
-                
+                <input type="range" id="aggregateLikes" name="aggregateLikes" placeholder="Puntuacion máx 9" onChange={(e) => validateLikes(e.target.value)} />
+
                 <label htmlFor="healthScore">Puntuacion de la salud</label>
-                <input type="number" name="healthScore" onChange={(e) => validateRange(e.target.value)}/>
-             
+                <input class="slider" type="range" id="healthScore" min={0} max={10} name="healthScore" onChange={(e) => validateRange(e.target.value)} />
+
+
                 <label htmlFor="typeRecipe">Tipo de Dieta</label>
                 <select name="typeRecipe" id="typeRecipe">
-                    {console.log(typeRecipes)}
-                    {typeDiets.map(e=>
-                        // <option key={e.id} value={e.id}>{e.name}</option>
-                        console.log(typeDiets)
-                        )}
-                    {/* <option value="vegan">Vegana</option>
-                    <option value="vegetarian">Vegetariana</option>
-                    <option value="glutenFree">Sin gluten</option> */}
+                    {/* <p>{typeDiets.title}</p> */}
+                    {typeDiets.map((e) => {
+                        return <option value={e.id} key={e.id} >{e.title}</option>
+                    })}
                 </select >
 
                 <label htmlFor="image">Imagen</label>
-                <input type="text" name="image" placeholder="Ingrese url de la imagen..."/>
-                <button type="submit">Crear</button>               
+                <input type="text" name="image" id="image" placeholder="Ingrese url de la imagen..." />
+                <button type="submit">Crear</button>
             </form>
             {/* </div> */}
         </div>

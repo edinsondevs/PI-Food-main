@@ -3,7 +3,7 @@ import '../Components/Styles/Card.css'
 import { Link } from "react-router-dom";
 
 export const Card = ({ title, id, image, typeDiets, aggregateLikes }) => {
-    console.log(typeDiets);
+    // console.log(typeDiets);
     return (
         <main className="grid">
             <article>
