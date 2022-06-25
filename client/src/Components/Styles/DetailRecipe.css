@@ -58,7 +58,8 @@ html {
 .card-body {
     /* display: inline-block; */
     float: left;
-    /* width: 310px; */
+    /* width: 510px; */
+    width: 50%;
 }
 
 .card-number {
@@ -118,6 +119,8 @@ html {
 
 .card-media {
     float: center;
+    width: 400px;
+    height: 300px;
 }
 
 .card-shadow {

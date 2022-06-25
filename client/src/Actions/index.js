@@ -14,10 +14,10 @@ export const getRecipes = () => {
 export const getTypeRecipes = (payload) => {
     // console.log(payload)
     return async function (dispatch) {
-        // let json = await axios.get('http://localhost:3001/types');
+        let json = await axios.get('http://localhost:3001/types');
         return dispatch({
             type: 'GET_TYPE_RECIPES',
-            payload
+            payload: json.data
         })
     }
 }
@@ -70,4 +70,5 @@ export const postNewRecipe = (payload) => {
         console.log(json);
         return json
     }
+    
 } 

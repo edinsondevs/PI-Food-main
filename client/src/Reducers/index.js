@@ -17,7 +17,7 @@ export default function rootReducer(state = initialState, action) {
 
             return ({
                 ...state,
-                dietasFiltradas: action.payload
+                typeDiets: action.payload
             })
 
         // const type = state.recipes
