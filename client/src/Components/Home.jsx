@@ -1,12 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    getRecipes,
-    getTypeRecipes,
-    orderByName,
-    getNameRecipes,
-    orderByLikes,
-} from "../Actions/index";
+import {getRecipes, getTypeRecipes, orderByName, getNameRecipes, orderByLikes } from "../Actions/index";
 import { Card } from "../Components/Card";
 import Pagginate from "./Paginate.jsx";
 import { Loading } from "../Components/Loading.jsx";
@@ -21,10 +15,7 @@ export const Home = () => {
     const [recipesPerPage, setRecipesPerPage] = useState(9);
     const indexOfLastRecipes = currentPage * recipesPerPage;
     const indexOfFirstRecipes = indexOfLastRecipes - recipesPerPage;
-    const currentRecipes = allRecipes.slice(
-        indexOfFirstRecipes,
-        indexOfLastRecipes
-    );
+    const currentRecipes = allRecipes.slice( indexOfFirstRecipes, indexOfLastRecipes);
 
     const [inputDietas, setInputDietas] = useState("all");
 

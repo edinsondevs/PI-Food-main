@@ -28,7 +28,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     image: {
-      // type: DataTypes.STRING(12345),
       type: DataTypes.TEXT,
       defaultValue: 'https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png',
     },
