@@ -1,6 +1,6 @@
 .cmp-form>* {
     /* font: 1.4em 'Unkempt', sans-serif; */
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1em;
 }
 
@@ -11,7 +11,7 @@
     grid-auto-flow: row dense;
     grid-gap: .8em;
     background: #eee;
-    padding: 1em;
+    padding: 3em;
     border-radius: .5em;
     margin-left: auto;
     margin-right: auto;
@@ -20,7 +20,14 @@
     align-items: center;
     justify-content: space-around;
 }
+.cmp-container-form{
+    height: 94vmin;
+    
+}
 
+.cmp-form>input{
+    width: 30rem
+}
 /* Mensaje validador del formulario */
 .cmp-form>span {
     color: red;
@@ -28,8 +35,8 @@
     font-weight: bold;
     font-size: 0.6rem;
     position: absolute;
-    right: 4rem;
-    height: 25rem;
+    right: 4.5rem;
+    height: 28rem;
 }
 
 .cmp-form>label,
@@ -49,7 +56,10 @@
     max-height: 3em;
     border: 0;
 }
-.cmp-form>input{
+.cmp-form_title{
+    padding: 3rem;
+}
+.cmp-form>input {
     grid-column: controls;
     /* min-width: 3em; */
     grid-row: auto;
@@ -67,47 +77,23 @@
     color: white;
 }
 
+.cmp-form>button:hover {
+    background: rgb(0, 0, 0);
+    color: white;
+    text-decoration: none;
+}
+
 .cmp-form>textarea {
     resize: none;
     min-height: 3em;
 }
 
-
-/* **************************************************************************** */
-/* Language: Rating */
-/*.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    }
-    
-    .rating > input{
-     display:none;
-    }
-    
-    .rating > label {
-    position: relative;
-    width: 1.1em;
-    color: #FFD700;
-    cursor: pointer;
-    }
-    
-    .rating > label::before{
-    content: "\2605";
+.slider {
     position: absolute;
-    opacity: 0;
-    }
-    
-    .rating > label:hover:before,
-    .rating > label:hover ~ label:before {
-    opacity: 1 !important;
-    }
-    
-    .rating > input:checked ~ label:before{
-    opacity:1;
-    }
-    
-    .rating:hover > input:checked ~ label:before{ 
-    opacity: 0.4;
-     }
-     */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    align-items: center;
+}

@@ -2,8 +2,8 @@ const initialState = {
     recipes: [],
     typeDiets: [],
     details: [],
-    recipesOrderLikes: [], 
-
+    recipesOrderLikes: [],
+    dietasFiltradas: [],
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -15,24 +15,26 @@ export default function rootReducer(state = initialState, action) {
             }
         case 'GET_TYPE_RECIPES':
 
-            const type = state.recipes
-            // console.log(type)
-            let typeRecipe = action.payload
-            // console.log(typeRecipe)
-            const typeFilter = type.filter(e => e.typeDiets.includes(typeRecipe))
-            // console.log(typeFilter)
-            // const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)
-            return {
+            return ({
                 ...state,
-                recipes: typeFilter
-            }
-            
+                dietasFiltradas: action.payload
+            })
+
+        // const type = state.recipes
+        // console.log(type)
+        // let typeRecipe = action.payload
+        // console.log(typeRecipe)
+        // const typeFilter = type.filter(e => e.typeDiets.includes(typeRecipe))
+        // console.log(typeFilter)
+        // const typeRecipes = action.payload === 'All' ? allRecipes : allRecipes.filter(e => e.dietas === action.payload)
+
+
 
         // ORDENAMIENTO POR NOMBRE
         case 'ORDER_BY_NAME':
             // console.log(state.recipes)
             let sortArr = action.payload === 'asc' ?
-            state.recipes.sort(function (a, b) {
+                state.recipes.sort(function (a, b) {
                     if (a.title > b.title) {
                         return 1
                     }

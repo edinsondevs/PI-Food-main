@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getNameRecipes } from "../Actions/index"
 import './Styles/SearchBar.css'
+import { Link } from 'react-router-dom';
 
 export const SearchBar = () => {
     const dispatch = useDispatch();

@@ -1,15 +1,7 @@
-/* body { */
-/* background: url('https://i.pinimg.com/originals/1a/45/1c/1a451c2844826c3691ee80512e9e1166.jpg'); */
-/* background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fback_origin_pic%2F04%2F62%2F17%2Fba5b34a44659a0723ad7c7b6d739d084.jpg&f=1&nofb=1'); */
-/* background-size: cover; */
-/* } */
-
 .grid {
     display: grid;
-    /* grid-template-columns: minmax(200px, 250px); */
     grid-template-columns: 250px 50px;
     grid-template-rows: 450px;
-    /* grid-template-rows: minmax(100px, 450px); */
     padding-bottom: 20px;
     align-items: stretch;
     position: relative;
@@ -19,6 +11,7 @@
 .grid>article {
     border: 1px solid #ccc;
     box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 1.5);
+    background-color: #fff;
     align-content: space-between;
     display: grid;
     justify-content: center;
@@ -32,12 +25,22 @@
     height: 200px;
 }
 
-.text {
-    padding: 0px 20px 20px;
+.text-title {
+    padding: 10px 20px 2px;
     position: relative;
     /* color: rgb(255, 255, 255); */
 }
 
+.text-num{
+    font-size: 0.7rem;
+    color: red;
+    font-weight: bold;
+}
+
+.text-ref{
+    font-style: italic;
+    font-size: 0.8rem;;
+}
 .btn-link {
     background: darkkhaki;
     text-decoration: none;

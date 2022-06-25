@@ -250,7 +250,7 @@ router.post("/recipe", async (req, res, next) => {
       aggregateLikes,
       healthScore, 
       instructions,
-      typeDiets: typeDiets.map(e=> typeDiets.push(e)),
+      // typeDiets: typeDiets.map(e=> typeDiets.push(e)),
       image,
     })
     // // BUSCO EN LA DB LA DIETA PARA ASOCIARSELA A LA RECETA

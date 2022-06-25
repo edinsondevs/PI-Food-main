@@ -20,18 +20,19 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+    background-color: rgb(174, 255, 0);
+    color: black;
 }
 
 .navbar {
     overflow: hidden;
-    background: darkkhaki;
+    background: rgb(0, 0, 0);
     font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
-    background: darkkhaki;
-    color: white;    
+    /* background-color: rgb(174, 255, 0); */
+    color: rgb(0, 0, 0);    
     margin: 0;
     cursor: pointer;
     

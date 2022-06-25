@@ -13,10 +13,6 @@ export const Navbar = () => {
         dispatch(getRecipes());
     }, [dispatch]);
 
-    function handleClick(e) {
-        e.preventDefault();
-        dispatch(getRecipes());
-    }
     return (
         <nav className="navbar">
             <ul className="navbar-nav">
