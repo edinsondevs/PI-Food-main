@@ -1,16 +1,3 @@
-/* .cmp-container-detail { */
-/* border: 1px solid rgb(193, 10, 10); */
-/* position: absolute; */
-/* padding-top: 2rem; */
-/* color: #fff; */
-/* } */
-
-/* .cmp-detail-img{
-    width: 250px;
-    height: 200px;
-    padding: 1rem;
-} */
-
 
 html {
     /* box-sizing: border-box; */
@@ -58,8 +45,9 @@ html {
 .cmp-card-body {
     /* display: inline-block; */
     float: left;
-    /* width: 510px; */
-    width: 50%;
+    width: 510px;
+    /* width: 50%; */
+    margin: 0.7em;
 }
 
 .cmp-card-number {
@@ -87,7 +75,7 @@ html {
     display: inline-block;
     font-weight: 300;
     line-height: 22px;
-    margin: 10px 0;
+    margin: 10px 20px;
     text-align:justify;
 }
 
@@ -98,7 +86,6 @@ html {
     letter-spacing: 6px;
     margin: 5px 0 20px;
     position: relative;
-    text-align: left;
     text-transform: uppercase;
 }
 
@@ -113,8 +100,9 @@ html {
 }
 
 .cmp-card-tag {
-    float: left;
-    margin: 5px 0 0;
+    float: inherit;
+    margin: 0 0 0;
+    width: 500px;
 }
 
 .cmp-card-media {
@@ -147,4 +135,9 @@ html {
 background: rgb(0, 0, 0);
 color: white;
 text-decoration: none;
+}
+
+.cmp-card-diets{
+    text-transform: capitalize;
+    margin: revert;
 }

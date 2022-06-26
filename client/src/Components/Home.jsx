@@ -57,16 +57,16 @@ export const Home = () => {
             <div className="cmp-container-home">
                 <div className="cmp-home-filter-container">
                     <div>
-                        <h3>Ordena por Alfabeto: </h3>
+                        <h3>Sort by Alphabet: </h3>
                         <select className="cmp-container-home_Select" onChange={(e) => handleSort(e)}>
                             <option value="asc">A - Z</option>
                             <option value="desc">Z - A</option>
                         </select>
                     </div>
                     <div>
-                        <h3>Tipo de Dieta: </h3>
+                        <h3>Type of Diet: </h3>
                         <select className="cmp-container-home_Select" onChange={(e) => setInputDietas(e.target.value)}>
-                            <option value="all">Todas</option>
+                            <option value="all">All</option>
                             {allTypes?.map((e, i) =>{
                                 return <option value={e} key={i}>{e}</option>
                             }                            
@@ -74,7 +74,7 @@ export const Home = () => {
                         </select>
                     </div>
                     <div>
-                        <h3>Ordena por Puntuacion: </h3>
+                        <h3>Sort by Score: </h3>
                         <select className="cmp-container-home_Select" onChange={(e) => handleLikes(e)}>
                             <option value="asc">Min - Max</option>
                             <option value="desc">Max - Min</option>

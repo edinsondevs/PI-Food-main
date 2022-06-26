@@ -6,9 +6,9 @@ import './Styles/LandingPage.css';
 export const LandingPage = () => {
     return (
         <div className="LandingPage">
-            <p className="neon-text">Cocinar con amor <br/> te Alimenta el Alma</p>
+            <p className="neon-text">&hearts; Cooking with Love <br/> Feeds your Soul &hearts; </p>
             <Link to="/home">
-                <button className="cmp-LandingPage">Ingresar a la Pagina</button>
+                <button className="cmp-LandingPage">View Recipes</button>
             </Link>
 
         </div>

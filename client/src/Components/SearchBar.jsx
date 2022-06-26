@@ -21,9 +21,9 @@ export const SearchBar = () => {
     }
     return (
         <div className="cmp-searchbar">
-            <input className="cmp-searchbar" type="text" placeholder="Ingrese ingrediente..." value={name}  onChange={handleInputName} />
+            <input className="cmp-searchbar" type="text" placeholder="Enter ingredient.." value={name}  onChange={handleInputName} />
             {/* {console.log(name)}; */}
-            <button className="btn-searchbar" onClick={handleSubmit}>Buscar</button>
+            <button className="btn-searchbar" onClick={handleSubmit}>Search</button>
         </div>
     )
 }

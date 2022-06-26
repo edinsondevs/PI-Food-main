@@ -26,22 +26,41 @@
     height: 200px;
 }
 
-.text-title {
+.cmp-title {
+    margin: 1em;
+}
+
+.cmp-text-title {
     padding: 10px 20px 2px;
     position: relative;
     /* color: rgb(255, 255, 255); */
 }
 
-.text-num{
+/* 
+border: 1px solid;
+min-height: 13em;
+display: contents; 
+*/
+.cmp-text {
+    border: 1px solid;
+    min-height: 13em;
+    display: contents;
+
+}
+
+.cmp-text-num {
     font-size: 0.7rem;
     color: red;
     font-weight: bold;
 }
 
-.text-ref{
+.cmp-text-ref {
     font-style: italic;
-    font-size: 0.8rem;;
+    font-size: 0.8rem;
+    padding: inherit;
+    margin: 1em;
 }
+
 .btn-link {
     background: darkkhaki;
     text-decoration: none;
@@ -56,7 +75,7 @@
 .btn-link:focus {
     background: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
-    
+
 }
 
 .tooltip {

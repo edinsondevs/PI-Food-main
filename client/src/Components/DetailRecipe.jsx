@@ -21,7 +21,8 @@ const DetailRecipe = (props) => {
         return { __html: xtext }
     }
     let diets = (details.typeDiets)
-    console.log(diets)
+
+
     return (
         <main className="cmp-container-detail">
 
@@ -32,23 +33,36 @@ const DetailRecipe = (props) => {
                         <h2 className="cmp-card-title">{details.title}</h2>
                         <div className="cmp-card-read">Summary</div>
                         <span className="cmp-card-description subtle" ><p dangerouslySetInnerHTML={createMarkup(details.summary)} /> </span>
+                        <div className="cmp-card-read">
+                            Types Diets
+                            <p className="cmp-card-diets subtle">{diets + " "}</p>
+                        </div>
+                        <div className="cmp-card-read">
+                            Types of dishes
+                            <p className="cmp-card-diets subtle">{details.dishTypes}</p>
+                        </div>
+                        <div className="cmp-card-read">
+                            Health Score
+                            <p className="cmp-card-tag cmp-card-circle subtle">{details.healthScore}</p>
+                        </div>
+                        <div className="cmp-card-read">
+                            Likes
+                            <p className="cmp-card-tag cmp-card-circle subtle">{details.aggregateLikes}</p>
+                        </div>
+                    </div>
+                    <div className="cmp-card-body">
+                        <img src={details.image} alt="" className="cmp-card-media" />
                         <div className="cmp-card-read">Instruccions</div>
                         <span className="cmp-card-description subtle" ><p dangerouslySetInnerHTML={createMarkup(details.instructions)} /> </span>
-                        <div className="cmp-card-read">Types Diets</div>
-                        <span className="cmp-card-description subtle">{diets}</span>
-                        <br />
-                        <br />
-                        <div className="cmp-card-read">Likes</div>
-                        <span className="cmp-card-tag cmp-card-circle subtle">{details.aggregateLikes}</span>
+
                     </div>
-                    <div>
-                        <img src={details.image} alt="" className="cmp-card-media" />
-                    </div>
+                    <br />
+                    <br />
                 </div>
                 <Link to="/home">
-                    <button className="cmp-card-button">Volver</button>
+                    <button className="cmp-card-button">Back to</button>
                 </Link>
-                
+
             </div>
 
 

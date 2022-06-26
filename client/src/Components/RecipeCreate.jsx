@@ -87,10 +87,10 @@ const handleSelect = (e) => {
   return (
 
     <div className="cmp-container">
-      <h1 className="cmp-form_title">Crear una Receta</h1>
+      <h1 className="cmp-form_title">Create a Recipe</h1>
       {/* <div className="cmp-form-container"> */}
       <form className="cmp-form" action="" onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="title">Titulo</label>
+        <label htmlFor="title">Title</label>
         <input className="cmp-form_input"
           type="text"
           id="title"
@@ -98,30 +98,30 @@ const handleSelect = (e) => {
           value={input.value}
           // onChange={(e) => validateName(e.target.value)}
           onChange={handleChange}
-          placeholder="Ingrese nombre de la receta"
+          placeholder="Enter recipe name"
         />
         {!error ? null : <span>{error}</span>}
         {/* <div> */}
-        <label htmlFor="summary">Resumen</label>
+        <label htmlFor="summary">Summary</label>
         <input className="cmp-form_input" type="text" name="summary" id="" value={input.summary} onChange={handleChange}></input>
         {/* </div> */}
-        <label htmlFor="instructions">Instrucciones</label>
+        <label htmlFor="instructions">Instructions</label>
         <input className="cmp-form_input" type="text" name="instructions" id="" value={input.instructions} onChange={handleChange}></input>
-        <label htmlFor="aggregateLikes">Puntuacion del plato</label>
+        <label htmlFor="aggregateLikes">Dish score</label>
         <input className="cmp-form_input"
           type="number"
           name="aggregateLikes"
-          placeholder="Puntuacion máx 9"
+          placeholder="Max. score 9"
           // onChange={(e) => validateLikes(e.target.value)}
           value={input.aggregateLikes} 
           onChange={handleChange}
         />
         {/* {!setErrorLikes ? null : <span>{setErrorLikes}</span>} */}
 
-        <label htmlFor="healthScore">Puntuacion de la salud</label>
-        <input className="cmp-form_input" type="number" name="healthScore" value={input.healthScore} onChange={handleChange}/>
+        <label htmlFor="healthScore">Health score</label>
+        <input className="cmp-form_input" type="number" placeholder="Max. score 9" name="healthScore" value={input.healthScore} onChange={handleChange}/>
 
-        <label htmlFor="typeDiets">Tipo de Dieta</label>
+        <label htmlFor="typeDiets">Type of Diet</label>
        
         <select name="typeDiets" id="typeDiets" multiple  onChange={handleSelect}>
         <option value={input.typeDiets} name="typeDiets"></option>
@@ -140,12 +140,11 @@ const handleSelect = (e) => {
           onChange={handleChange}
           placeholder="Ingrese url de la imagen..."
         />
-        <button type="submit">Crear</button>
+        <button type="submit">Create</button>
         <button>
-          <Link to="/home">Volver</Link>
+          <Link to="/home">Back to</Link>
         </button>
       </form>
-      {/* </div> */}
     </div>
   );
 };
