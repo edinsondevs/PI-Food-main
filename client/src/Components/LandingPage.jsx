@@ -6,10 +6,11 @@ import './Styles/LandingPage.css';
 export const LandingPage = () => {
     return (
         <div className="LandingPage">
-            <h1>Landing Page</h1>
+            <p className="neon-text">Cocinar con amor <br/> te Alimenta el Alma</p>
             <Link to="/home">
-                <button>Ingresar a la Pagina</button>
+                <button className="cmp-LandingPage">Ingresar a la Pagina</button>
             </Link>
+
         </div>
     )
 }

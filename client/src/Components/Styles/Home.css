@@ -16,3 +16,22 @@
     justify-content: center;
 }
 
+.cmp-container-home_Select{
+    width: 10em;
+    height: 1.5em;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 1px 0.5em;
+    /* background-color: transparent; */
+    /* color: white; */
+}
+
+.cmp-container-home_Select:hover{
+    
+    border-radius: 1px 0.5em;
+}
+
+.cmp-container-home_Select>option{
+    border-radius: 1px 0.5em;
+    color: black;
+}

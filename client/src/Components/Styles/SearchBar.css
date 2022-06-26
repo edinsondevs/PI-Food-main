@@ -15,11 +15,11 @@
 }
 
 .btn-searchbar:hover{
-    background-color: rgb(174, 255, 0);
+    background: darkkhaki;
     color: black;
 }
 
-input {
+.cmp-searchbar {
     color: rgb(8, 8, 8);
     min-width: 200px;
     min-height: 45px;

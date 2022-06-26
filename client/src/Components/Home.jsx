@@ -19,7 +19,7 @@ export const Home = () => {
 
     const [inputDietas, setInputDietas] = useState("all");
 
-    const [refresh, setRefresh] = useState(true);
+    const allTypes = useSelector((state) => state.typeDiets)
 
     const show = () => {
         // setRefresh(!refresh)
@@ -34,7 +34,9 @@ export const Home = () => {
         setCurrentPage(pageNumber);
     };
 
+
     useEffect(() => {
+        dispatch(getTypeRecipes())
         dispatch(getRecipes());
     }, [dispatch]);
 
@@ -56,34 +58,26 @@ export const Home = () => {
                 <div className="cmp-home-filter-container">
                     <div>
                         <h3>Ordena por Alfabeto: </h3>
-                        <select onChange={(e) => handleSort(e)}>
-                            <option value="asc">A-Z</option>
-                            <option value="desc">Z-A</option>
+                        <select className="cmp-container-home_Select" onChange={(e) => handleSort(e)}>
+                            <option value="asc">A - Z</option>
+                            <option value="desc">Z - A</option>
                         </select>
                     </div>
                     <div>
                         <h3>Tipo de Dieta: </h3>
-                        <select onChange={(e) => setInputDietas(e.target.value)}>
+                        <select className="cmp-container-home_Select" onChange={(e) => setInputDietas(e.target.value)}>
                             <option value="all">Todas</option>
-                            <option value="vegan">Vegana</option>
-                            <option value="lacto ovo vegetarian">Vegetariano</option>
-                            <option value="gluten free">Gluten Free</option>
-                            <option value="ketogenic">Ketogenic</option>
-                            <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
-                            <option value="lacto ovo vegetarian">Ovo-Vegetarian</option>
-                            <option value="pescatarian">Pescetarian</option>
-                            <option value="paleolithic">Paleo</option>
-                            <option value="primal">Primal</option>
-                            <option value="fodmap friendly">Low FODMAP</option>
-                            <option value="whole 30">Whole30</option>
-                            <option value="dairy free">Dairy Free</option>
+                            {allTypes?.map((e, i) =>{
+                                return <option value={e} key={i}>{e}</option>
+                            }                            
+                            )}                            
                         </select>
                     </div>
                     <div>
                         <h3>Ordena por Puntuacion: </h3>
-                        <select onChange={(e) => handleLikes(e)}>
-                            <option value="asc">Min-Max</option>
-                            <option value="desc">Max-Min</option>
+                        <select className="cmp-container-home_Select" onChange={(e) => handleLikes(e)}>
+                            <option value="asc">Min - Max</option>
+                            <option value="desc">Max - Min</option>
                         </select>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+
 .cmp-form>* {
     /* font: 1.4em 'Unkempt', sans-serif; */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -45,8 +46,15 @@
     grid-row: auto;
 }
 
+.cmp-form>select{
+    grid-column: controls;
+    min-width: 3em;
+    grid-row: auto;
+    padding: .4em;
+    max-height: 20em;
+    border: 0;
+}
 
-.cmp-form>select,
 .cmp-form>textarea,
 .cmp-form>button {
     grid-column: controls;
@@ -61,12 +69,13 @@
 }
 .cmp-form>input {
     grid-column: controls;
-    /* min-width: 3em; */
+    min-width: 3em;
     grid-row: auto;
     padding: .2em;
-    height: 1px;
+    height: 2em;
     border: 0;
 }
+
 
 .cmp-form>fieldset {
     grid-column: span 2;
@@ -97,3 +106,4 @@
     display: flex;
     align-items: center;
 }
+

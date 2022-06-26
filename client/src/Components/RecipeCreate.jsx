@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewRecipe, postNewRecipe } from "../Actions";
+import { getNewRecipe, getTypeRecipes, postNewRecipe } from "../Actions";
 import "../Components/Styles/RecipeCreate.css";
 
 export const RecipeCreate = () => {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
+  const allTypes = useSelector((state) => state.typeDiets)
+// console.log(allTypes)
 
   const [input, setInput] = useState({
     title: "",
@@ -18,9 +20,9 @@ export const RecipeCreate = () => {
     typeDiets: [],
   });
 
-  // useEffect(() => {
-  //     dispatch(getNewRecipe());
-  // })
+  useEffect(() => {
+      dispatch(getTypeRecipes());
+  }, [dispatch])
 
   const handleSubmit = () => {
     dispatch(postNewRecipe(input));
@@ -36,12 +38,23 @@ export const RecipeCreate = () => {
   };
 
   const handleChange = (e) => {
-
     setInput({
         ...input,
         [e.target.name]: e.target.value
     })
     //  console.log(input)
+}
+
+const handleSelect = (e) => {
+
+  if (input.typeDiets.includes(e.target.value)) {
+      return 'Diet Type exists'
+  } else {
+      setInput({
+          ...input,
+          typeDiets: [...input.typeDiets, e.target.value]
+      })
+  }
 }
 
   const [name, setName] = useState("");
@@ -72,12 +85,13 @@ export const RecipeCreate = () => {
   }
 
   return (
+
     <div className="cmp-container">
       <h1 className="cmp-form_title">Crear una Receta</h1>
       {/* <div className="cmp-form-container"> */}
       <form className="cmp-form" action="" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="title">Titulo</label>
-        <input
+        <input className="cmp-form_input"
           type="text"
           id="title"
           name="title"
@@ -89,12 +103,12 @@ export const RecipeCreate = () => {
         {!error ? null : <span>{error}</span>}
         {/* <div> */}
         <label htmlFor="summary">Resumen</label>
-        <input type="text" name="summary" id="" value={input.summary} onChange={handleChange}></input>
+        <input className="cmp-form_input" type="text" name="summary" id="" value={input.summary} onChange={handleChange}></input>
         {/* </div> */}
         <label htmlFor="instructions">Instrucciones</label>
-        <input type="text" name="instructions" id="" value={input.instructions} onChange={handleChange}></input>
+        <input className="cmp-form_input" type="text" name="instructions" id="" value={input.instructions} onChange={handleChange}></input>
         <label htmlFor="aggregateLikes">Puntuacion del plato</label>
-        <input
+        <input className="cmp-form_input"
           type="number"
           name="aggregateLikes"
           placeholder="Puntuacion máx 9"
@@ -105,26 +119,21 @@ export const RecipeCreate = () => {
         {/* {!setErrorLikes ? null : <span>{setErrorLikes}</span>} */}
 
         <label htmlFor="healthScore">Puntuacion de la salud</label>
-        <input type="number" name="healthScore" value={input.healthScore} onChange={handleChange}/>
+        <input className="cmp-form_input" type="number" name="healthScore" value={input.healthScore} onChange={handleChange}/>
 
-        <label htmlFor="typeRecipe">Tipo de Dieta</label>
-        <select name="typeRecipe" id="typeRecipe">
-          <option value="vegan">Vegana</option>
-          <option value="lacto ovo vegetarian">Vegetariano</option>
-          <option value="gluten free">Gluten Free</option>
-          <option value="ketogenic">Ketogenic</option>
-          <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
-          <option value="lacto ovo vegetarian">Ovo-Vegetarian</option>
-          <option value="pescatarian">Pescetarian</option>
-          <option value="paleolithic">Paleo</option>
-          <option value="primal">Primal</option>
-          <option value="fodmap friendly">Low FODMAP</option>
-          <option value="whole 30">Whole30</option>
-          <option value="dairy free">Dairy Free</option>
-        </select>
+        <label htmlFor="typeDiets">Tipo de Dieta</label>
+       
+        <select name="typeDiets" id="typeDiets" multiple  onChange={handleSelect}>
+        <option value={input.typeDiets} name="typeDiets"></option>
+        {allTypes?.map((e,i) => {
+          
+          return <option value={e} key={i} >{e}</option>
+        })
+        }
+        </select> 
 
         <label htmlFor="image">Imagen</label>
-        <input
+        <input className="cmp-form_input"
           type="text"
           name="image"
           value={input.image}
