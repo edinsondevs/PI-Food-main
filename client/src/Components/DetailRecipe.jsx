@@ -15,13 +15,29 @@ const DetailRecipe = (props) => {
     }, [dispatch]);
 
     const details = useSelector((state) => state.details);
-    console.log(details);
 
     function createMarkup(xtext) {
         return { __html: xtext }
     }
-    let diets = (details.typeDiets)
+    let dietas = (details.typeDiets)
+    let diets = []
+    if (dietas.length > 0) console.log(dietas)
 
+    if (dietas.length > 0) {
+        if(Object.prototype.toString.call(dietas[0]) === '[object Object]'){
+            dietas.map((diet) => {
+                diets.push(diet.title)
+                console.log(diets)
+                console.log("Es un Objeto")
+            }
+        )}
+        else {
+            diets = dietas
+            console.log(diets)
+            console.log("No es Objeto")
+        }
+    } 
+     
 
     return (
         <main className="cmp-container-detail">
@@ -35,7 +51,9 @@ const DetailRecipe = (props) => {
                         <span className="cmp-card-description subtle" ><p dangerouslySetInnerHTML={createMarkup(details.summary)} /> </span>
                         <div className="cmp-card-read">
                             Types Diets
-                            <p className="cmp-card-diets subtle">{diets + " "}</p>
+                            <p className="cmp-card-diets subtle" >
+                                {diets + " "}
+                            </p>
                         </div>
                         <div className="cmp-card-read">
                             Types of dishes

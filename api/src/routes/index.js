@@ -174,9 +174,6 @@ router.get("/recipes/:id", async (req, res, next) => {
         title: apiIdInfo2.title,
         image: apiIdInfo2.image,
         summary: apiIdInfo2.summary,
-        vegetarian: apiIdInfo2.vegetarian,
-        vegan: apiIdInfo2.vegan,
-        glutenFree: apiIdInfo2.glutenFree,
         typeDiets: apiIdInfo2.diets.map((e) => e),
         aggregateLikes: apiIdInfo2.aggregateLikes,
         healthScore: apiIdInfo2.healthScore,
@@ -186,7 +183,11 @@ router.get("/recipes/:id", async (req, res, next) => {
       res.json(apiInfoDetail);
       console.log("Busco por API");
     } else {
-      const dbInfoDetail = await Recipe.findByPk(id);
+      const dbInfoDetail = await Recipe.findByPk(id,{
+        include:{
+          model: TypeDiet
+        }
+      });
       res.send(dbInfoDetail);
     }
   } catch (error) {
@@ -198,7 +199,7 @@ router.get("/recipes/:id", async (req, res, next) => {
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // CREA  una receta en la base de datos
 router.post("/recipe", async (req, res, next) => {
-  let { title, summary, aggregateLikes, healthScore, instructions, typeDiets, image , dishTypes} = req.body;
+  let { title, summary, aggregateLikes, healthScore, instructions, typeDiets, image } = req.body;
   // let typeDiets = diets
   console.log(typeDiets)
 
@@ -212,19 +213,15 @@ router.post("/recipe", async (req, res, next) => {
       instructions,
       typeDiets,
       image,
-      // dishTypes
     })
-    // // BUSCO EN LA DB LA DIETA PARA ASOCIARSELA A LA RECETA
-    // const dietDb = await TypeDiet.findAll({
-    //   where: { title: typeDiets },
-    // })
+
     const diets = await TypeDiet.findAll({
       where: { title: typeDiets }
     })
     // AGREGO LA DIETA A LA RECETA EN LA DB
-    // console.log(dietDb);
+
     //  ASOCIO LA TABLA INTERMEDIA
-    // console.log(created);
+
     await recipe.addTypeDiet(diets);
     res.send("Personaje creado correctamente");
   } catch (error) {

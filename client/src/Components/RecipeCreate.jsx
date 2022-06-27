@@ -8,7 +8,7 @@ export const RecipeCreate = () => {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   const allTypes = useSelector((state) => state.typeDiets)
-// console.log(allTypes)
+  // console.log(allTypes)
 
   const [input, setInput] = useState({
     title: "",
@@ -21,7 +21,7 @@ export const RecipeCreate = () => {
   });
 
   useEffect(() => {
-      dispatch(getTypeRecipes());
+    dispatch(getTypeRecipes());
   }, [dispatch])
 
   const handleSubmit = () => {
@@ -39,23 +39,23 @@ export const RecipeCreate = () => {
 
   const handleChange = (e) => {
     setInput({
-        ...input,
-        [e.target.name]: e.target.value
+      ...input,
+      [e.target.name]: e.target.value
     })
     //  console.log(input)
-}
-
-const handleSelect = (e) => {
-
-  if (input.typeDiets.includes(e.target.value)) {
-      return 'Diet Type exists'
-  } else {
-      setInput({
-          ...input,
-          typeDiets: [...input.typeDiets, e.target.value]
-      })
   }
-}
+
+  const handleSelect = (e) => {
+
+    if (input.typeDiets.includes(e.target.value)) {
+      return 'Diet Type exists'
+    } else {
+      setInput({
+        ...input,
+        typeDiets: [...input.typeDiets, e.target.value]
+      })
+    }
+  }
 
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -113,32 +113,32 @@ const handleSelect = (e) => {
           name="aggregateLikes"
           placeholder="Max. score 9"
           // onChange={(e) => validateLikes(e.target.value)}
-          value={input.aggregateLikes} 
+          value={input.aggregateLikes}
           onChange={handleChange}
         />
         {/* {!setErrorLikes ? null : <span>{setErrorLikes}</span>} */}
 
         <label htmlFor="healthScore">Health score</label>
-        <input className="cmp-form_input" type="number" placeholder="Max. score 9" name="healthScore" value={input.healthScore} onChange={handleChange}/>
+        <input className="cmp-form_input" type="number" placeholder="Max. score 9" name="healthScore" value={input.healthScore} onChange={handleChange} />
 
         <label htmlFor="typeDiets">Type of Diet</label>
-       
-        <select name="typeDiets" id="typeDiets" multiple  onChange={handleSelect}>
-        <option value={input.typeDiets} name="typeDiets"></option>
-        {allTypes?.map((e,i) => {
-          
-          return <option value={e} key={i} >{e}</option>
-        })
-        }
-        </select> 
 
-        <label htmlFor="image">Imagen</label>
+        <select name="typeDiets" id="typeDiets" multiple onChange={handleSelect}>
+          <option value={input.typeDiets} name="typeDiets"></option>
+          {allTypes?.map((e, i) => {
+
+            return <option value={e} key={i} >{e}</option>
+          })
+          }
+        </select>
+
+        <label htmlFor="image">Image</label>
         <input className="cmp-form_input"
           type="text"
           name="image"
           value={input.image}
           onChange={handleChange}
-          placeholder="Ingrese url de la imagen..."
+          placeholder="URL Img..."
         />
         <button type="submit">Create</button>
         <button>
