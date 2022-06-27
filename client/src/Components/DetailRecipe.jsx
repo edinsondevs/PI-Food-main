@@ -19,24 +19,24 @@ const DetailRecipe = (props) => {
     function createMarkup(xtext) {
         return { __html: xtext }
     }
-    let dietas = (details.typeDiets)
-    let diets = []
-    if (dietas.length > 0) console.log(dietas)
+    let diets = (details.typeDiets)
+    // let diets = []
+    // if (dietas.length > 0) console.log(dietas)
 
-    if (dietas.length > 0) {
-        if(Object.prototype.toString.call(dietas[0]) === '[object Object]'){
-            dietas.map((diet) => {
-                diets.push(diet.title)
-                console.log(diets)
-                console.log("Es un Objeto")
-            }
-        )}
-        else {
-            diets = dietas
+    // if (dietas.length > 0) {
+    //     if(Object.prototype.toString.call(dietas[0]) === '[object Object]'){
+    //         dietas.map((diet) => {
+    //             diets.push(diet.title)
+    //             console.log(diets)
+    //             console.log("Es un Objeto")
+    //         }
+    //     )}
+    //     else {
+    //         diets = dietas
             console.log(diets)
-            console.log("No es Objeto")
-        }
-    } 
+    //         console.log("No es Objeto")
+    //     }
+    // } 
      
 
     return (
@@ -52,7 +52,12 @@ const DetailRecipe = (props) => {
                         <div className="cmp-card-read">
                             Types Diets
                             <p className="cmp-card-diets subtle" >
-                                {diets + " "}
+                                {/* {diets + " "} */}
+                                {Object.prototype.toString.call(diets[0]) === '[object String]' ? //console.log(diets)
+                                <p className="cmp-card-diets subtle">{diets}</p>
+                                    : <p className="cmp-card-diets subtle">{diets.map((e=>e.title+ " "))}</p>
+                                    // console.log(diets.map((e=>e.title)))
+                                }
                             </p>
                         </div>
                         <div className="cmp-card-read">
