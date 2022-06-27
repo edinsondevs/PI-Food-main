@@ -20,24 +20,6 @@ const DetailRecipe = (props) => {
         return { __html: xtext }
     }
     let diets = (details.typeDiets)
-    // let diets = []
-    // if (dietas.length > 0) console.log(dietas)
-
-    // if (dietas.length > 0) {
-    //     if(Object.prototype.toString.call(dietas[0]) === '[object Object]'){
-    //         dietas.map((diet) => {
-    //             diets.push(diet.title)
-    //             console.log(diets)
-    //             console.log("Es un Objeto")
-    //         }
-    //     )}
-    //     else {
-    //         diets = dietas
-            console.log(diets)
-    //         console.log("No es Objeto")
-    //     }
-    // } 
-     
 
     return (
         <main className="cmp-container-detail">
@@ -56,7 +38,6 @@ const DetailRecipe = (props) => {
                                 {Object.prototype.toString.call(diets[0]) === '[object String]' ? //console.log(diets)
                                 <p className="cmp-card-diets subtle">{diets}</p>
                                     : <p className="cmp-card-diets subtle">{diets.map((e=>e.title+ " "))}</p>
-                                    // console.log(diets.map((e=>e.title)))
                                 }
                             </p>
                         </div>
