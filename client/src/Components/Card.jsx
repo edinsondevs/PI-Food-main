@@ -1,7 +1,7 @@
 import React from "react"
 import '../Components/Styles/Card.css'
 import { Link } from "react-router-dom";
-import icoLike from './Images/pulgares-hacia-arriba.png'
+
 
 export const Card = ({ title, id, image, typeDiets, aggregateLikes }) => {
     // console.log(typeDiets);

@@ -1,12 +1,13 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getRecipes, getTypeRecipes, orderByName, getNameRecipes, orderByLikes } from "../Actions/index";
+import { getRecipes, getTypeRecipes, orderByName, getNameRecipes, orderByLikes } from "../Actions/index";
 import { Card } from "../Components/Card";
 import Pagginate from "./Paginate.jsx";
 import { Loading } from "../Components/Loading.jsx";
 import "../Components/Styles/Home.css";
 
 export const Home = () => {
+    const [inputDietas, setInputDietas] = useState("all");
     const dispatch = useDispatch();
     const allRecipes = useSelector((state) => state.recipes);
     const [orden, setOrden] = useState("");
@@ -15,14 +16,12 @@ export const Home = () => {
     const [recipesPerPage, setRecipesPerPage] = useState(9);
     const indexOfLastRecipes = currentPage * recipesPerPage;
     const indexOfFirstRecipes = indexOfLastRecipes - recipesPerPage;
-    const currentRecipes = allRecipes.slice( indexOfFirstRecipes, indexOfLastRecipes);
+    const currentRecipes = allRecipes.slice(indexOfFirstRecipes, indexOfLastRecipes);
 
-    const [inputDietas, setInputDietas] = useState("all");
 
     const allTypes = useSelector((state) => state.typeDiets)
 
     const show = () => {
-        // setRefresh(!refresh)
         if (inputDietas === "all") {
             return allRecipes;
         } else {
@@ -43,13 +42,13 @@ export const Home = () => {
     function handleSort(e) {
         dispatch(orderByName(e.target.value));
         setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`);
+        setOrden(`${e.target.value}`);
     }
 
     function handleLikes(e) {
         dispatch(orderByLikes(e.target.value));
         setCurrentPage(1);
-        setRecipesOrderLikes(`Ordenado ${e.target.value}`);
+        setRecipesOrderLikes(`${e.target.value}`);
     }
 
     return (
@@ -67,10 +66,11 @@ export const Home = () => {
                         <h3>Type of Diet: </h3>
                         <select className="cmp-container-home_Select" onChange={(e) => setInputDietas(e.target.value)}>
                             <option value="all">All</option>
-                            {allTypes?.map((e, i) =>{
+                            {console.log(allTypes)}
+                            {allTypes?.map((e, i) => {
                                 return <option value={e} key={i}>{e}</option>
-                            }                            
-                            )}                            
+                            }
+                            )}
                         </select>
                     </div>
                     <div>

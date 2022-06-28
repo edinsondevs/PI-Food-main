@@ -38,3 +38,7 @@ button {
     
 }
 
+.navbar-right{
+    display: inline-block;
+    Justify-content: flex-end
+}

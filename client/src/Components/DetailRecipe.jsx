@@ -17,10 +17,8 @@ const DetailRecipe = (props) => {
     function createMarkup(xtext) {
         return { __html: xtext }
     }
-    // if(details){
     let diets = (details.typeDiets)
-    console.log(details)
-// }
+    // console.log(details)
     return ( 
         <main className="cmp-container-detail">
             <div className="cmp-card-container">
@@ -52,7 +50,6 @@ const DetailRecipe = (props) => {
                         <img src={details.image} alt="" className="cmp-card-media" />
                         <div className="cmp-card-read">Instruccions</div>
                         <span className="cmp-card-description subtle" ><p dangerouslySetInnerHTML={createMarkup(details.instructions)} /> </span>
-
                     </div>
                     <br />
                     <br />

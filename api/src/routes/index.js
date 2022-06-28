@@ -9,7 +9,6 @@ const { API_temp } = process.env; //    CAMBIAR EN TODOS LOS FETCH EL NOMBRE HAS
 
 const router = Router();
 
-
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);[]
 
@@ -77,16 +76,6 @@ const getAllDiets = async () => {
   return infoTotal;
 };
 
-/************ *****************************ACA ES PRUEBA DE DB 01:00 ******************************/
-router.get('/db', async (req, res) => {
-  const getAllTypes = await getDb()
-  // const getAllTypes = await getApi()
-  // const getAllTypes = await getAllDiets()
-
-  res.send(getAllTypes)
-})
-/************ *****************************EL DE ARRIBA ES PRUEBA DE DB 01:00 ******************************/
-
 
 //*************************************    GET TYPES  **************************** */
 //    EXTRAE SOLO LOS DATOS NECESARIOS
@@ -124,7 +113,6 @@ router.get("/recipes", async (req, res) => {
   let title = req.query.name;
   const allDiets = await getAllDiets();
   const dbInfo = await getDb();
-  // console.log(dbInfo);
 
   let recipes = await axios.get(
     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_temp}&addRecipeInformation=true&number=100&query=${title}`
@@ -140,7 +128,6 @@ router.get("/recipes", async (req, res) => {
         typeDiets: e.diets.map((e) => e),
       };
     });
-    //  res.send(apiInfoQuery);
     const responseTotal = dbInfoQuery.concat(apiInfoQuery);
     const dataQuery = dbInfoQuery.concat(apiInfoQuery);
     if (dataQuery.length === 0) {
@@ -239,7 +226,6 @@ router.post("/recipe", async (req, res, next) => {
       where: { title: typeDiets }
     })
     // AGREGO LA DIETA A LA RECETA EN LA DB
-
     //  ASOCIO LA TABLA INTERMEDIA
 
     await recipe.addTypeDiet(diets);
