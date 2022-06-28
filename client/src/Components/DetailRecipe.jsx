@@ -8,22 +8,20 @@ import { getRecipesById } from '../Actions'
 
 const DetailRecipe = (props) => {
     const dispatch = useDispatch();
-    // console.log(props);
 
     useEffect(() => {
         dispatch(getRecipesById(props.match.params.id));
     }, [dispatch]);
 
     const details = useSelector((state) => state.details);
-    console.log(details)
     function createMarkup(xtext) {
         return { __html: xtext }
     }
     // if(details){
     let diets = (details.typeDiets)
-    // console.log(diets)
+    console.log(details)
 // }
-    return (
+    return ( 
         <main className="cmp-container-detail">
             <div className="cmp-card-container">
                 <div className="card u-clearfix">
@@ -35,12 +33,6 @@ const DetailRecipe = (props) => {
                             Types Diets
                             <p className="cmp-card-diets subtle" >
                                 {" " + diets +" "}
-                                {
-                                //console.log(Object.prototype.toString.call(diets[0])) === '[object String]' ? console.log(diets)
-                                // <p className="cmp-card-diets subtle">{diets}</p>
-                                 //  : <p className="cmp-card-diets subtle">{diets.map((e=>e.title+ " "))}</p>
-                                 //   console.log(diets)
-                                }
                             </p>
                         </div>
                         <div className="cmp-card-read">

@@ -16,10 +16,13 @@
     display: grid;
     justify-content: center;
     justify-items: center;
-    box-shadow: 10px 10px 5px #e6ecee;
+    box-shadow: 10px 10px 5px darkkhaki;
     align-items: baseline
 }
-
+.grid>article:hover {
+    box-shadow: -15px -15px 2px -1px darkkhaki;
+   }
+   
 .grid>article img {
     /* max-width: 100%; */
     width: 250px;

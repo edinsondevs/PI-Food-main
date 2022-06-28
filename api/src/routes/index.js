@@ -175,8 +175,14 @@ router.get("/recipes/:id", async (req, res, next) => {
       });
       dbInfoQuery = await dbInfoDetail.map((e) => {
         return {
-          id: e.id, image: e.image, title: e.title,
+          id: e.id,
+          title: e.title,
+          summary: e.summary,
           aggregateLikes: e.aggregateLikes,
+          healthScore: e.healthScore,
+          instructions: e.instructions,
+          image: e.image,
+          createdInDb: e.createdInDb,
           typeDiets: e.typeDiets.map(e=> " "+ e.title),
         };
       });

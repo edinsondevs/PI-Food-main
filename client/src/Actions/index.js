@@ -66,9 +66,11 @@ export const getRecipesById = (id) => {
 // CREACION DE RECETA
 export const postNewRecipe = (payload) => {
     return async function (dispatch) {
-        let json = await axios.post('http://localhost:3001/recipe', payload);
-        console.log(json);
-        return json
+        await axios.post('http://localhost:3001/recipe', payload)
+        .then(response => {alert("Recipe Added")})
+        .then(console.log("Recipe Added"))
+        .catch(error => console.log(error))
+        // return json
     }
     
 } 
