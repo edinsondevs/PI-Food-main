@@ -72,7 +72,7 @@ const getDb = async () => {
 const getAllDiets = async () => {
   const getApiInfo = await getApi();
   const getDbInfo = await getDb();
-  const infoTotal = getApiInfo.concat(getDbInfo);
+  const infoTotal = getDbInfo.concat(getApiInfo);
   return infoTotal;
 };
 
@@ -206,7 +206,6 @@ router.get("/recipes/:id", async (req, res, next) => {
 // CREA  una receta en la base de datos
 router.post("/recipe", async (req, res, next) => {
   let { title, summary, aggregateLikes, healthScore, instructions, typeDiets, image } = req.body;
-  // let typeDiets = diets
   if(image === "") image = "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png";
   
   console.log("Esto es imagen seteada: "+ image)

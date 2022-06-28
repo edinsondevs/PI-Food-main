@@ -139,7 +139,7 @@ export const RecipeCreate = () => {
           name="aggregateLikes"
           placeholder="Max. score 99"
           min={1}
-          max={100}
+          max={99}
           value={input.aggregateLikes}
           onChange={handleChange}
         /> {!errors.aggregateLikes ? null : <span className="cmp-form-valid_likes">{errors.aggregateLikes}</span>}
@@ -151,7 +151,7 @@ export const RecipeCreate = () => {
           placeholder="Max. score 99"
           name="healthScore"
           min={1}
-          max={100}
+          max={99}
           value={input.healthScore}
           onChange={handleChange}
         />
