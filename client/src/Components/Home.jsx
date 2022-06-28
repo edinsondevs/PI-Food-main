@@ -64,13 +64,26 @@ export const Home = () => {
                     </div>
                     <div>
                         <h3>Type of Diet: </h3>
-                        <select className="cmp-container-home_Select" onChange={(e) => setInputDietas(e.target.value)}>
+                        {/* <select className="cmp-container-home_Select" onChange={(e) => setInputDietas(e.target.value)}>
                             <option value="all">All</option>
                             {console.log(allTypes)}
                             {allTypes?.map((e, i) => {
                                 return <option value={e} key={i}>{e}</option>
                             }
                             )}
+                        </select> */}
+                        <select onChange={(e) => setInputDietas(e.target.value)}>
+                            <option value="all">All</option>
+                            <option value="vegan">Vegana</option>
+                            <option value="dairy free">Dairy Free</option>
+                            <option value="gluten free">Gluten Free</option>
+                            <option value="ketogenic">Ketogenic</option>
+                            <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
+                            <option value="pescatarian">Pescatarian</option>
+                            <option value="paleolithic">Paleolithic</option>
+                            <option value="primal">Primal</option>
+                            <option value="fodmap friendly">Low FODMAP</option>
+                            <option value="whole 30">Whole30</option>
                         </select>
                     </div>
                     <div>
