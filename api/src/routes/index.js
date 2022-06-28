@@ -163,7 +163,27 @@ router.get("/recipes/:id", async (req, res, next) => {
 
   try {
     const verifId = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
-    if (!verifId.test(id)) {
+    if (verifId.test(id)) {
+      const dbInfoDetail = await Recipe.findAll({
+        include:{
+          model: TypeDiet,
+          attributes: ["title"],
+          througth: {
+            attributes: []
+          }
+        }
+      });
+      dbInfoQuery = await dbInfoDetail.map((e) => {
+        return {
+          id: e.id, image: e.image, title: e.title,
+          aggregateLikes: e.aggregateLikes,
+          typeDiets: e.typeDiets.map(e=> " "+ e.title),
+        };
+      });
+      res.json(dbInfoQuery[0])
+    } 
+    
+    else {
       let apiInfoDetail = {};
       let response = await axios.get(
         `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_temp}`
@@ -180,15 +200,8 @@ router.get("/recipes/:id", async (req, res, next) => {
         instructions: apiIdInfo2.instructions,
         dishTypes: apiIdInfo2.dishTypes,
       };
-      res.json(apiInfoDetail);
       console.log("Busco por API");
-    } else {
-      const dbInfoDetail = await Recipe.findByPk(id,{
-        include:{
-          model: TypeDiet
-        }
-      });
-      res.send(dbInfoDetail);
+      return res.json(apiInfoDetail);
     }
   } catch (error) {
     next(error)
@@ -201,8 +214,9 @@ router.get("/recipes/:id", async (req, res, next) => {
 router.post("/recipe", async (req, res, next) => {
   let { title, summary, aggregateLikes, healthScore, instructions, typeDiets, image } = req.body;
   // let typeDiets = diets
-  console.log(typeDiets)
-
+  if(image === "") image = "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png";
+  
+  console.log("Esto es imagen seteada: "+ image)
   try {
     // CARGO LA BD CON LOS TYPES DE DIETAS
     const recipe = await Recipe.create({

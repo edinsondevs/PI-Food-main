@@ -60,7 +60,7 @@ export default function rootReducer(state = initialState, action) {
                     return 0
                 }) :
                 state.recipes.sort(function (a, b) {
-                    if (a.aggregateLikes > b.aggregateLikes) {
+                    if (a.aggregateLikes > b.aggregateLikes) { 
                         return -1
                     }
                     if (a.aggregateLikes < b.aggregateLikes) {

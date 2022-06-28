@@ -15,16 +15,16 @@ const DetailRecipe = (props) => {
     }, [dispatch]);
 
     const details = useSelector((state) => state.details);
-
+    console.log(details)
     function createMarkup(xtext) {
         return { __html: xtext }
     }
+    // if(details){
     let diets = (details.typeDiets)
-
+    // console.log(diets)
+// }
     return (
         <main className="cmp-container-detail">
-
-
             <div className="cmp-card-container">
                 <div className="card u-clearfix">
                     <div className="cmp-card-body">
@@ -34,10 +34,12 @@ const DetailRecipe = (props) => {
                         <div className="cmp-card-read">
                             Types Diets
                             <p className="cmp-card-diets subtle" >
-                                {/* {diets + " "} */}
-                                {Object.prototype.toString.call(diets[0]) === '[object String]' ? //console.log(diets)
-                                <p className="cmp-card-diets subtle">{diets}</p>
-                                    : <p className="cmp-card-diets subtle">{diets.map((e=>e.title+ " "))}</p>
+                                {" " + diets +" "}
+                                {
+                                //console.log(Object.prototype.toString.call(diets[0])) === '[object String]' ? console.log(diets)
+                                // <p className="cmp-card-diets subtle">{diets}</p>
+                                 //  : <p className="cmp-card-diets subtle">{diets.map((e=>e.title+ " "))}</p>
+                                 //   console.log(diets)
                                 }
                             </p>
                         </div>
