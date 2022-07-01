@@ -54,7 +54,7 @@ export const getNameRecipes = (payload, next) => {
 // BUSQUEDA POR ID
 export const getRecipesById = (id) => {
     return async function (dispatch) {
-        let json = await axios.get('http://localhost:3001/recipes/' + id);
+        let json = await axios.get('http://localhost:3001/recipe/' + id);
         return dispatch({
             type: 'GET_RECIPES_BY_ID',
             payload: json.data
