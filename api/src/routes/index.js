@@ -208,7 +208,6 @@ router.post("/recipe", async (req, res, next) => {
   let { title, summary, aggregateLikes, healthScore, instructions, typeDiets, image } = req.body;
   if(image === "") image = "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png";
   
-  console.log("Esto es imagen seteada: "+ image)
   try {
     // CARGO LA BD CON LOS TYPES DE DIETAS
     const recipe = await Recipe.create({
@@ -220,7 +219,7 @@ router.post("/recipe", async (req, res, next) => {
       typeDiets,
       image,
     })
-
+    // BUSCO LOS TIPOS DE DIETAS EN LA DB SEGUN LO QUE ME LLEGA POR BODY
     const diets = await TypeDiet.findAll({
       where: { title: typeDiets }
     })
@@ -228,7 +227,7 @@ router.post("/recipe", async (req, res, next) => {
     //  ASOCIO LA TABLA INTERMEDIA
 
     await recipe.addTypeDiet(diets);
-    res.send("Personaje creado correctamente");
+    res.send("Receta creada correctamente");
   } catch (error) {
     next(error);
   }

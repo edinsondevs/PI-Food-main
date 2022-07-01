@@ -3,7 +3,7 @@ import '../Components/Styles/Pagginate.css'
 
 const Pagginate = ({recipesPerPage, allRecipes, pagginate}) => {
     const pageNumber=[]
-    // console.log(allRecipes);
+    
     for (let i = 1; i <= Math.ceil(allRecipes.length/recipesPerPage); i++) {
         pageNumber.push(i) 
     }
