@@ -14,7 +14,7 @@ export const getRecipes = () => {
 export const getTypeRecipes = (payload) => {
     // console.log(payload)
     return async function (dispatch) {
-        let json = await axios.get('http://localhost:3001/types');
+        let json = await axios.get('http://localhost:3001/types/diets/db');
         return dispatch({
             type: 'GET_TYPE_RECIPES',
             payload: json.data
@@ -62,7 +62,6 @@ export const getRecipesById = (id) => {
     }
 }
 
-
 // CREACION DE RECETA
 export const postNewRecipe = (payload) => {
     return async function (dispatch) {
@@ -70,7 +69,17 @@ export const postNewRecipe = (payload) => {
         .then(response => {alert("Recipe Added")})
         .then(console.log("Recipe Added"))
         .catch(error => console.log(error))
-        // return json
-    }
-    
+    }    
 } 
+
+// DELETE DE RECETAPOR ID 
+export const deleteRecipesById = (id) => {
+    return async function (dispatch) {
+        let url = await axios.delete('http://localhost:3001/recipe/delete/'+ id);
+        console.log(url)
+        return dispatch({
+            type: 'DELETE_RECIPE_BY_ID',   
+            id 
+        })
+    }
+}

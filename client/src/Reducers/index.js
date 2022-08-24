@@ -13,8 +13,8 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 recipes: action.payload
             }
+            
         case 'GET_TYPE_RECIPES':
-
             return ({
                 ...state,
                 typeDiets: action.payload
@@ -91,6 +91,12 @@ export default function rootReducer(state = initialState, action) {
         case 'POST_NAME_RECIPES':
             return {
                 ...state,
+            }
+        
+        case 'DELETE_RECIPE_BY_ID':
+            return {
+                ...state,
+                ...state.recipes
             }
 
 

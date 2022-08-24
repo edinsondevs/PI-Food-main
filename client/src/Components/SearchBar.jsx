@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getNameRecipes } from "../Actions/index"
-import './Styles/SearchBar.css'
-import { Link } from 'react-router-dom';
+
 
 export const SearchBar = () => {
     const dispatch = useDispatch();
@@ -10,20 +9,18 @@ export const SearchBar = () => {
 
     function handleInputName(e) {
         e.preventDefault();
-        setName(e.target.value);   
+        setName(e.target.value);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(getNameRecipes(name)); 
-        setName('')   ;
-        // console.log(name)    
+        dispatch(getNameRecipes(name));
+        setName('');
     }
     return (
-        <div className="cmp-searchbar">
-            <input className="cmp-searchbar" type="text" placeholder="Enter ingredient.." value={name}  onChange={handleInputName} />
-            {/* {console.log(name)}; */}
-            <button className="btn-searchbar" onClick={handleSubmit}>Search</button>
-        </div>
+            <div className="d-flex">
+                <input className="form-control me-2" type="search" placeholder="Search" value={name}  onChange={handleInputName} aria-label="Search" />
+                <button className="btn btn-outline-success" type="submit" onClick={handleSubmit}>Search</button>
+            </div>
     )
 }

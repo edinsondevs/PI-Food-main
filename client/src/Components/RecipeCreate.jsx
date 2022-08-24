@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypeRecipes, postNewRecipe } from "../Actions";
-import "../Components/Styles/RecipeCreate.css";
+import "../Components/Styles/Create.css";
 
 export const RecipeCreate = () => {
   const dispatch = useDispatch();
-  // const allRecipes = useSelector((state) => state.recipes);
   const allTypes = useSelector((state) => state.typeDiets);
-
   const [input, setInput] = useState({
     title: "",
     summary: "",
@@ -19,7 +17,6 @@ export const RecipeCreate = () => {
     typeDiets: [],
   });
 
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getTypeRecipes());
@@ -54,141 +51,151 @@ export const RecipeCreate = () => {
     }
   };
 
-  //****************      VALIDACION     *****/
-  function validateForm(input) {
-    let err = {}
-    if (/[^ A-Za-z]/.test(input.title)) {  // NO PERMITE NUMEROS NI CARACTERES ESPECIALES      
-      err = { title: "Special characters are not allowed" }
-    } else if (input.title.length <= 5) {
-      err = { title: "You must enter at least 5 characters" }
-    }
-    else if (input.summary.length <= 20) {
-      err = { summary: "You must enter at least 20 characters" }
-    }
-    else if (input.aggregateLikes.length > 2) {
-      err = { aggregateLikes: "Max Score 99" }
-    }
-    else if (input.healthScore.length > 2) {
-      err = { healthScore: "Max Score 99" }
-    }
-
-
-    else {
-      err = {
-        title: "",
-        summary: "",
-        aggregateLikes: "",
-        image: ""
-      }
-    }
-    return err
-  }
 
   const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-    setErrors(validateForm({
-      ...input,
-      [e.target.name]: e.target.value,
-    }))
+
   };
+
+
 
   //****************      RENDERIZACION DEL COMPONENTE     *****/
   return (
-    <div className="cmp-container">
-      <h1 className="cmp-form_title">Create a Recipe</h1>
-      <form className="cmp-form" action="" onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="title">Title</label>
-        <input
-          className="cmp-form_input"
-          type="text"
-          id="title"
-          name="title"
-          value={input.title}
-          onChange={handleChange}
-          placeholder="Enter recipe name"
-        />
-        {!errors.title ? null : <span className="cmp-form-valid_title">{errors.title}</span>}
-        <label htmlFor="summary">Summary</label>
-        <input
-          className="cmp-form_input"
-          type="text"
-          name="summary"
-          id=""
-          value={input.summary}
-          onChange={handleChange}
-        />
-        {!errors.summary ? null : <span className="cmp-form-valid_summary">{errors.summary}</span>}
-        {/* </div> */}
-        <label htmlFor="instructions">Instructions</label>
-        <input
-          className="cmp-form_input"
-          type="text"
-          name="instructions"
-          id=""
-          value={input.instructions}
-          onChange={handleChange}
-        ></input>
+    <div className="container-md ">
+      <div className="row ">
+        <form className="row gx-3 gy-2 bg-dark bg-opacity-75 needs-validation text-white p-4 mt-5 " action="" onSubmit={(e) => handleSubmit(e)}>
+          {/* ***************  FILA  **************************** */}
+          <div className="row mb-3">
+            <div className="col-sm-6 ">
+              <label
+                htmlFor="title"
+                className="form-label">Title</label>
+              <input
+                className="form-control"
+                type="text"
+                id="title"
+                name="title"
+                value={input.title}
+                onChange={handleChange}
+                placeholder="Enter recipe name"
+                required
+              />
+              <div class="valid-feedback">
+                ¡Se ve bien!
+              </div>
+            </div>
+            <div className="col-md-6">
+              <label
+                htmlFor="summary"
+                className="form-label">Summary</label>
+              <input
+                className="form-control"
+                type="text"
+                name="summary"
+                id="summary"
+                value={input.summary}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+          {/* ***************  FILA  **************************** */}
+          <div className="row mb-3">
+            <div className="form-floating-input-padding-t">
+              <label htmlFor="exampleFormControlTextarea1">Instructions</label>
+              <textarea
+                className="form-control"
+                placeholder="Type the instructions here"
+                id="exampleFormControlTextarea1"
+                style={{ height: "100px" }}
+                name="instructions"
+                value={input.instructions}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
 
-        <label htmlFor="aggregateLikes">Dish score</label>
-        <input
-          className="cmp-form_input"
-          type="number"
-          name="aggregateLikes"
-          placeholder="Max. score 99"
-          min={1}
-          max={99}
-          value={input.aggregateLikes}
-          onChange={handleChange}
-        /> {!errors.aggregateLikes ? null : <span className="cmp-form-valid_likes">{errors.aggregateLikes}</span>}
+          {/* ***************  FILA  **************************** */}
+          <div className="row mb-3">
+            <div className="col-sm  ">
+              <label htmlFor="customRange2" className="form-label">Dish score</label>
+              <input
+                type="range"
+                className="form-range"
+                min={0}
+                max={5}
+                id="customRange2"
+                name="aggregateLikes"
+                value={input.aggregateLikes}
+                onChange={handleChange}
+              />
+              <label htmlFor="healthScore" className="form-label">Health score</label>
+              <input
+                type="range"
+                className="form-range"
+                min={0}
+                max={5}
+                id="customRange3"
+                name="healthScore"
+                value={input.healthScore}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-md-5">
+              <label htmlFor="typeDiets">Type of Diet</label>
+              <select
+                className="form-select"
+                size="4"
+                aria-label="Ejemplo de multiple select"
+                name="typeDiets"
+                id="typeDiets"
+                multiple
+                onChange={handleSelect}
+              >
+                {allTypes?.map((e, i) => {
+                  return (
+                    <option value={e} key={i}>
+                      {e}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+          {/* ***************  FILA  **************************** */}
+          <div className="col-md-12">
+            <label htmlFor="basic-url" className="form-label">Your Image</label>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon3">https://static-sevilla.abc.es/</span>
+              <input
+                value={input.image}
+                type="text"
+                name="image"
+                className="form-control"
+                id="basic-url"
+                onChange={handleChange}
+                aria-describedby="basic-addon3"
+              />
+            </div>
 
-        <label htmlFor="healthScore">Health score</label>
-        <input
-          className="cmp-form_input"
-          type="number"
-          placeholder="Max. score 99"
-          name="healthScore"
-          min={1}
-          max={99}
-          value={input.healthScore}
-          onChange={handleChange}
-        />
-        {!errors.healthScore ? null : <span className="cmp-form-valid_score">{errors.healthScore}</span>}
-        <label htmlFor="typeDiets">Type of Diet</label>
-
-        <select
-          name="typeDiets"
-          id="typeDiets"
-          multiple
-          onChange={handleSelect}
-        >
-          <option value={input.typeDiets} name="typeDiets"></option>
-          {allTypes?.map((e, i) => {
-            return (
-              <option value={e} key={i}>
-                {e}
-              </option>
-            );
-          })}
-        </select>
-
-        <label htmlFor="image">Image</label>
-        <input
-          className="cmp-form_input"
-          type="text"
-          name="image"
-          value={input.image}
-          onChange={handleChange}
-          placeholder="URL Img..."
-        />
-
-        <button type="submit" >Create</button>
-        <button>
-          <Link to="/home">Back to</Link>
-        </button>
-      </form>
+          </div>
+          <div className="col-sm-12 d-flex justify-content-center ">
+            <div className="col-sm-4">
+              <button className="btn btn-success " type="submit">Create</button>
+            </div>
+            <div className="col-sm-4">
+              <Link to="/home">
+                <button className="btn btn-danger" >Back to</button>
+              </Link>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+
   );
 };

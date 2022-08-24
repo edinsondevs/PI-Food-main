@@ -5,6 +5,7 @@
     list-style-type: none;
 }
 
+
 .pagginate>li button{
     background: darkkhaki;
     color: white;
@@ -22,3 +23,4 @@
     width: 4em;
     /* height: 4em; */
 }
+

@@ -19,10 +19,11 @@
     box-shadow: 10px 10px 5px darkkhaki;
     align-items: baseline
 }
+
 .grid>article:hover {
     box-shadow: -15px -15px 2px -1px darkkhaki;
-   }
-   
+}
+
 .grid>article img {
     /* max-width: 100%; */
     width: 250px;
@@ -39,11 +40,6 @@
     /* color: rgb(255, 255, 255); */
 }
 
-/* 
-border: 1px solid;
-min-height: 13em;
-display: contents; 
-*/
 .cmp-text {
     border: 1px solid;
     min-height: 13em;
@@ -84,8 +80,6 @@ display: contents;
 .tooltip {
     position: relative;
     display: inline-block;
-    /* border-bottom: 1px dotted rgb(129, 120, 120); */
-    /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
@@ -105,4 +99,17 @@ display: contents;
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+.grid>article img.img-delete {
+    max-width: 2em;
+    max-height: 2em;
+    /* border: 2px solid blue; */
+}
+
+.grid>article div.cmp-div-delete{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: flex-end;
+    align-items:flex-start;
 }

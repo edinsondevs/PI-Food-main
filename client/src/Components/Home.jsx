@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, getTypeRecipes, orderByName, getNameRecipes, orderByLikes } from "../Actions/index";
+import { getRecipes, getTypeRecipes, orderByName, orderByLikes } from "../Actions/index";
 import { Card } from "../Components/Card";
 import Pagginate from "./Paginate.jsx";
 import { Loading } from "../Components/Loading.jsx";
@@ -22,14 +22,17 @@ export const Home = () => {
         if (inputDietas === "all") {
             return allRecipes;
         } else {
-            return allRecipes.filter((e) => e.typeDiets.includes(inputDietas));
+            let copiaInputDiets = inputDietas
+            let recipesFilter = allRecipes.filter((e) => e.typeDiets.includes(copiaInputDiets))
+            return (
+                recipesFilter
+            )
         }
     };
 
     const pagginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
 
     useEffect(() => {
         dispatch(getTypeRecipes())
@@ -87,11 +90,13 @@ export const Home = () => {
             <div>
                 <Pagginate
                     recipesPerPage={recipesPerPage}
-                    allRecipes={show()}
+                    allRecipes={currentRecipes.length === 0 ? <Loading /> : show()}
                     pagginate={pagginate}
                 />
+                </div>
+                <div className="container ">
                 {currentRecipes.length === 0 && <Loading />}
-                <div className="cmp-home-card-container">
+                <div className="row row-cols-1 row-cols-sm-5 g-5 pt-5" style={{ height: "100px" }}>
                     {currentRecipes &&
                         show()
                             .slice(indexOfFirstRecipes, indexOfLastRecipes)

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
-import './Styles/Navbar.css';
 import { useDispatch } from "react-redux";
 import { getRecipes } from "../Actions/index";
 
@@ -14,12 +13,12 @@ export const Navbar = () => {
     }, [dispatch]);
 
     return (
-        <nav className="navbar">
-            <ul className="navbar-nav">
-                <li><NavLink exact to="/home" >Home</NavLink></li>
-                <li><NavLink to="/create" >Create Recipes</NavLink></li>
-                <li><SearchBar /></li>
-            </ul>
+        <nav className="navbar bg-dark ">
+            <div className="container-fluid ">
+                <NavLink className="navbar-brand text-light" exact to="/home" >Home</NavLink>
+                <NavLink className="navbar-brand text-light" to="/create" >Create Recipes</NavLink>
+                <SearchBar />
+            </div>
         </nav>
     );
 }

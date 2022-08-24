@@ -10,11 +10,11 @@
     color: white;
 }
 
-.cmp-home-card-container{
+/* .cmp-home-card-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
+} */
 
 .cmp-container-home_Select{
     width: 10em;
