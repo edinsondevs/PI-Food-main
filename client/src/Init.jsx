@@ -1,10 +1,10 @@
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-import { Home } from "./Components/Home";
-import { RecipeCreate } from "./Components/RecipeCreate.jsx";
-import { Navbar } from './Components/Navbar.jsx';
+import { Home } from "./Components/Pages/Home";
+import { RecipeCreate } from "./Components/Pages/RecipeCreate.jsx";
+import { Navbar } from './Components/Pages/Navbar';
 import './App.css';
-import { Card } from './Components/Card';
-import DetailRecipe from './Components/DetailRecipe.jsx';
+import { Card } from './Components/Pages/Card';
+import DetailRecipe from './Components/Pages/DetailRecipe';
 
 
 function Init() {

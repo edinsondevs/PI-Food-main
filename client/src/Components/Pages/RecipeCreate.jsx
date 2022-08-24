@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTypeRecipes, postNewRecipe } from "../Actions";
-import "../Components/Styles/Create.css";
+import { getTypeRecipes, postNewRecipe } from "../../Actions";
+import "../../Components/Styles/Create.css";
 
 export const RecipeCreate = () => {
   const dispatch = useDispatch();

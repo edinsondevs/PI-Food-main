@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, getTypeRecipes, orderByName, orderByLikes } from "../Actions/index";
-import { Card } from "./Card";
-import Pagginate from "./Paginate.jsx";
-import { Loading } from "../Components/Loading.jsx";
-import "../Components/Styles/Home.css";
+import { getRecipes, getTypeRecipes, orderByName, orderByLikes } from "../../Actions/index";
+import { Card } from "../Pages/Card";
+import Pagginate from "../Pages/Paginate";
+import { Loading } from "./Loading.jsx";
+import "../Styles/Home.css";
 
 export const Home = () => {
     const [inputDietas, setInputDietas] = useState("all");

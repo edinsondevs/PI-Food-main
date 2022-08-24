@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 // import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import './Styles/DetailRecipe.css'
-import { getRecipesById } from '../Actions'
+import '../Styles/DetailRecipe.css'
+import { getRecipesById } from '../../Actions'
 
 const DetailRecipe = (props) => {
     const dispatch = useDispatch();

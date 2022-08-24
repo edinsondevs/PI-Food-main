@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { deleteRecipesById, getRecipes } from "../Actions";
-import '../Components/Styles/Card.css'
+import { deleteRecipesById, getRecipes } from "../../Actions";
+import '../Styles/Card.css'
 
 export const Card = ({ title, id, image, typeDiets, aggregateLikes }) => {
     // console.log(typeDiets);
@@ -37,8 +37,6 @@ export const Card = ({ title, id, image, typeDiets, aggregateLikes }) => {
                         <Link to={`/recipes/${id}`} key={id} >
                             <button className="btn btn-warning btn-sm"> Detail  </button>
                         </Link>
-                    </div>
-                </div>
                 {
                     isRecipe ?
                         <div className="cmp-div-delete">
@@ -51,6 +49,8 @@ export const Card = ({ title, id, image, typeDiets, aggregateLikes }) => {
                             </div>
                         </div> : null
                 }
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { useDispatch } from "react-redux";
-import { getRecipes } from "../Actions/index";
+import { getRecipes } from "../../Actions/index";
 
 export const Navbar = () => {
 

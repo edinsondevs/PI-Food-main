@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-import { LandingPage } from "./Components/LandingPage";
+import { LandingPage } from "./Components/Pages/LandingPage";
 import Init from './Init';
 
 

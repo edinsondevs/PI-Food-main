@@ -1,5 +1,5 @@
 import React from "react"
-import '../Components/Styles/Pagginate.css'
+import '../Styles/Pagginate.css'
 
 const Pagginate = ({ recipesPerPage, allRecipes, pagginate }) => {
     const pageNumber = []
