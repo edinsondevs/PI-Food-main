@@ -9,7 +9,6 @@
 .pagginate>li button{
     background: darkkhaki;
     color: white;
-    /* background-color: antiquewhite; */
     border: 0px ;
     border-radius: 4px;
     margin-left: 0.5em;
@@ -21,6 +20,5 @@
     background: gray;
     color: rgb(255, 255, 255);
     width: 4em;
-    /* height: 4em; */
 }
 

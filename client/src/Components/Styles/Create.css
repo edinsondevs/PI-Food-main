@@ -1,13 +1,13 @@
 /* ==========================================================================
    #FONT
    ========================================================================== */
-.font-robo {
+/* .font-robo {
     font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
 }
 
 .font-poppins {
     font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
-}
+} */
 
 /* ==========================================================================
      #GRID
@@ -75,7 +75,7 @@ html {
 /**
    * A very simple reset that sits on top of Normalize.css.
    */
-body,
+/*body,
 h1,
 h2,
 h3,
@@ -95,7 +95,7 @@ fieldset,
 legend {
     margin: 0;
     padding: 0;
-}
+} */
 
 /**
    * Remove trailing margins from nested lists.
@@ -136,12 +136,12 @@ button {
     min-height: 100vh;
 }
 
-body {
+/* body {
     font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
     font-weight: 400;
     font-size: 14px;
-}
-
+} */
+/* 
 h1,
 h2,
 h3,
@@ -173,7 +173,7 @@ h5 {
 
 h6 {
     font-size: 13px;
-}
+} */
 
 /* ==========================================================================
      #SPACING

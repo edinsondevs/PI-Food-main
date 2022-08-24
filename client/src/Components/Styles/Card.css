@@ -1,105 +1,12 @@
-.grid {
-    display: grid;
-    grid-template-columns: 250px 50px;
-    grid-template-rows: 450px;
-    padding-bottom: 20px;
-    align-items: stretch;
-    position: relative;
-    margin: 40px auto;
-}
-
-.grid>article {
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 1.5);
-    background-color: #fff;
-    align-content: space-between;
-    display: grid;
-    justify-content: center;
-    justify-items: center;
-    box-shadow: 10px 10px 5px darkkhaki;
-    align-items: baseline
-}
-
-.grid>article:hover {
-    box-shadow: -15px -15px 2px -1px darkkhaki;
-}
-
-.grid>article img {
-    /* max-width: 100%; */
-    width: 250px;
-    height: 200px;
-}
-
-.cmp-title {
-    margin: 1em;
-}
-
-.cmp-text-title {
-    padding: 10px 20px 2px;
-    position: relative;
-    /* color: rgb(255, 255, 255); */
-}
-
-.cmp-text {
-    border: 1px solid;
-    min-height: 13em;
-    display: contents;
-
-}
-
-.cmp-text-num {
-    font-size: 0.7rem;
-    color: red;
-    font-weight: bold;
-}
-
-.cmp-text-ref {
+.cmp-text-type{
+    font-size: 0.8em;
     font-style: italic;
-    font-size: 0.8rem;
-    padding: inherit;
-    margin: 1em;
 }
 
-.btn-link {
-    background: darkkhaki;
-    text-decoration: none;
-    border: 0;
-    color: rgb(255, 255, 255);
-    padding: 10px;
-    width: 10rem;
-    margin-bottom: 1rem;
+.cmp-title{
+    font-size: 0.8em
 }
 
-.btn-link:hover,
-.btn-link:focus {
-    background: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-
-}
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-    visibility: hidden;
-    background-color: rgba(12, 12, 12, 0.807);
-    color: #fff;
-    text-align: center;
-    border-radius: 3px;
-
-    /* Position the tooltip text - see examples below! */
-    width: 100%;
-    top: 100%;
-    left: 50%;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
 
 .grid>article img.img-delete {
     max-width: 2em;

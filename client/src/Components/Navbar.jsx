@@ -14,7 +14,7 @@ export const Navbar = () => {
 
     return (
         <nav className="navbar bg-dark ">
-            <div className="container-fluid ">
+            <div className="container">
                 <NavLink className="navbar-brand text-light" exact to="/home" >Home</NavLink>
                 <NavLink className="navbar-brand text-light" to="/create" >Create Recipes</NavLink>
                 <SearchBar />

@@ -57,7 +57,6 @@ export const RecipeCreate = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
-
   };
 
 
@@ -67,6 +66,8 @@ export const RecipeCreate = () => {
     <div className="container-md ">
       <div className="row ">
         <form className="row gx-3 gy-2 bg-dark bg-opacity-75 needs-validation text-white p-4 mt-5 " action="" onSubmit={(e) => handleSubmit(e)}>
+          <p className="fs-3"> Create a Recipe
+          </p>
           {/* ***************  FILA  **************************** */}
           <div className="row mb-3">
             <div className="col-sm-6 ">
@@ -83,7 +84,7 @@ export const RecipeCreate = () => {
                 placeholder="Enter recipe name"
                 required
               />
-              <div class="valid-feedback">
+              <div className="valid-feedback">
                 ¡Se ve bien!
               </div>
             </div>

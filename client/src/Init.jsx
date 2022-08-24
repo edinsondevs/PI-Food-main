@@ -1,6 +1,5 @@
-import { Routes, Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { Home } from "./Components/Home";
-import { About } from "./Components/About.jsx";
 import { RecipeCreate } from "./Components/RecipeCreate.jsx";
 import { Navbar } from './Components/Navbar.jsx';
 import './App.css';
@@ -15,7 +14,6 @@ function Init() {
                 <Navbar />
                 <Switch >
                     <Route path="/home" component={Home} />
-                    <Route path="/about" component={About} />
                     <Route path="/create" component={RecipeCreate} />
                     <Route exact path="/recipes" component={Card} />
                     <Route path="/recipes/:id" component={DetailRecipe} />

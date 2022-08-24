@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipes, getTypeRecipes, orderByName, orderByLikes } from "../Actions/index";
-import { Card } from "../Components/Card";
+import { Card } from "./Card";
 import Pagginate from "./Paginate.jsx";
 import { Loading } from "../Components/Loading.jsx";
 import "../Components/Styles/Home.css";
@@ -56,15 +56,15 @@ export const Home = () => {
             <div className="cmp-container-home">
                 <div className="cmp-home-filter-container">
                     <div>
-                        <h3>Sort by Alphabet: </h3>
+                        <h4>Sort by Alphabet: </h4>
                         <select className="cmp-container-home_Select" onChange={(e) => handleSort(e)}>
                             <option value="asc">A - Z</option>
                             <option value="desc">Z - A</option>
                         </select>
                     </div>
                     <div>
-                        <h3>Type of Diet: </h3>
-                        <select onChange={(e) => setInputDietas(e.target.value)}>
+                        <h4>Type of Diet: </h4>
+                        <select className="cmp-container-home_Select" onChange={(e) => setInputDietas(e.target.value)}>
                             <option value="all">All</option>
                             <option value="vegan">Vegana</option>
                             <option value="dairy free">Dairy Free</option>
@@ -79,7 +79,7 @@ export const Home = () => {
                         </select>
                     </div>
                     <div>
-                        <h3>Sort by Score: </h3>
+                        <h4>Sort by Score: </h4>
                         <select className="cmp-container-home_Select" onChange={(e) => handleLikes(e)}>
                             <option value="asc">Min - Max</option>
                             <option value="desc">Max - Min</option>
@@ -96,7 +96,7 @@ export const Home = () => {
                 </div>
                 <div className="container ">
                 {currentRecipes.length === 0 && <Loading />}
-                <div className="row row-cols-1 row-cols-sm-5 g-5 pt-5" style={{ height: "100px" }}>
+                <div className="row row-cols-1 row-cols-sm-5 g-5 pt-5 justify-content-center" style={{ height: "100px" }}>
                     {currentRecipes &&
                         show()
                             .slice(indexOfFirstRecipes, indexOfLastRecipes)

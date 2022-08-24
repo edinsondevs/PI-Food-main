@@ -1,6 +1,4 @@
 .LandingPage {
-    /* background: url('https://i.pinimg.com/originals/1a/45/1c/1a451c2844826c3691ee80512e9e1166.jpg'); */
-    /* background-color: black; */
     padding-top: 20rem;
     padding-right: 40%;
 }
@@ -16,13 +14,17 @@
     border: 0;
     margin-top: 5.5em;
     font-size: 1.5em;
-    border-bottom: 1px solid rgb(13, 84, 238) 
+    border-bottom: 1px solid rgb(13, 84, 238) ;
+    border-radius: 0.5em;
+    transition: all 500ms;
 }
 
 .cmp-LandingPage:hover {
     background: darkkhaki;
     color: white;
     text-decoration: none;
+    border-radius: 0.5em;
+    transition: all 500ms;
 }
 
 .neon-text {

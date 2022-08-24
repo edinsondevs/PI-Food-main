@@ -1,6 +1,5 @@
-import { Routes, Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { LandingPage } from "./Components/LandingPage";
-import './App.css'; 
 import Init from './Init';
 
 

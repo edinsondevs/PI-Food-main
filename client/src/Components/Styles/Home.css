@@ -1,20 +1,11 @@
 .cmp-home-filter-container{
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     margin-bottom: 30px;
     padding: 1em;
     color: white;
 }
 
-/* .cmp-home-card-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-} */
 
 .cmp-container-home_Select{
     width: 10em;
@@ -22,16 +13,5 @@
     text-align: center;
     border: 1px solid;
     border-radius: 1px 0.5em;
-    /* background-color: transparent; */
-    /* color: white; */
 }
 
-.cmp-container-home_Select:hover{
-    
-    border-radius: 1px 0.5em;
-}
-
-.cmp-container-home_Select>option{
-    border-radius: 1px 0.5em;
-    color: black;
-}

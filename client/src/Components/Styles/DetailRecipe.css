@@ -1,7 +1,6 @@
 
 html {
-    /* box-sizing: border-box; */
-    font-size: 14px;
+    font-size: 15px;
 }
 
 *,
@@ -10,48 +9,21 @@ html {
     box-sizing: inherit;
 }
 
-.u-clearfix:before,
-.u-clearfix:after {
-    content: " ";
-    display: table;
-    
-}
-
-.u-clearfix:after {
-    clear: both;
-}
-
-.u-clearfix {
-    *zoom: 1;
-    
-}
-
 .subtle {
     color: #aaa;
 }
 
-.cmp-card-container {
-    margin: 25px auto 0;
-    position: relative;
-    width: 80rem;
-}
-
 .card {
-    /* border: 10px solid #ccc; */
     box-shadow: 15px 15px 15px darkkhaki;
     align-items: baseline;
     background-color: rgba(255, 255, 255, 0.922);
     padding: 30px;
     position: relative;
-    /* box-shadow: 0 0 5px rgba(75, 75, 75, .07);
-    z-index: 1; */
 }
 
 .cmp-card-body {
-    /* display: inline-block; */
     float: left;
     width: 510px;
-    /* width: 50%; */
     margin: 0.7em;
 }
 
