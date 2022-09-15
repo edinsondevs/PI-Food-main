@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "start": "concurrently \"npm:json\" nodemon -L",
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "json": "json-server --watch src/json/db.json --port 3004"
   },
   "author": "Edinson",
   "license": "ISC",
@@ -16,6 +17,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "body-parser": "^1.19.0",
+    "concurrently": "^7.4.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
