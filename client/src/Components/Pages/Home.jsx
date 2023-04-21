@@ -5,8 +5,10 @@ import { Card } from "../Pages/Card";
 import Pagginate from "../Pages/Paginate";
 import { Loading } from "./Loading.jsx";
 import "../Styles/Home.css";
+import { Grid } from "@nextui-org/react";
 
-export const Home = () => {
+export const Home = () =>
+{
     const [inputDietas, setInputDietas] = useState("all");
     const dispatch = useDispatch();
     const allRecipes = useSelector((state) => state.recipes);
@@ -18,7 +20,8 @@ export const Home = () => {
     const indexOfFirstRecipes = indexOfLastRecipes - recipesPerPage;
     const currentRecipes = allRecipes.slice(indexOfFirstRecipes, indexOfLastRecipes);
 
-    const show = () => {
+    const show = () =>
+    {
         if (inputDietas === "all") {
             return allRecipes;
         } else {
@@ -30,22 +33,26 @@ export const Home = () => {
         }
     };
 
-    const pagginate = (pageNumber) => {
+    const pagginate = (pageNumber) =>
+    {
         setCurrentPage(pageNumber);
     };
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         dispatch(getTypeRecipes())
         dispatch(getRecipes());
     }, [dispatch]);
 
-    function handleSort(e) {
+    function handleSort(e)
+    {
         dispatch(orderByName(e.target.value));
         setCurrentPage(1);
         setOrden(`${e.target.value}`);
     }
 
-    function handleLikes(e) {
+    function handleLikes(e)
+    {
         dispatch(orderByLikes(e.target.value));
         setCurrentPage(1);
         setRecipesOrderLikes(`${e.target.value}`);
@@ -93,27 +100,33 @@ export const Home = () => {
                     allRecipes={currentRecipes.length === 0 ? <Loading /> : show()}
                     pagginate={pagginate}
                 />
-                </div>
-                <div className="container ">
+            </div>
+            <div className="container ">
                 {currentRecipes.length === 0 && <Loading />}
                 <div className="row row-cols-1 row-cols-sm-5 g-5 pt-5 justify-content-center" style={{ height: "100px" }}>
                     {currentRecipes &&
                         show()
                             .slice(indexOfFirstRecipes, indexOfLastRecipes)
-                            .map((e) => {
+                            .map((e) =>
+                            {
                                 return (
-                                    <Card
-                                        id={e.id}
-                                        key={e.id}
-                                        title={e.title}
-                                        image={e.image}
-                                        typeDiets={e.typeDiets}
-                                        aggregateLikes={e.aggregateLikes}
-                                    />
+                                    <Grid.Container gap={2} justify="center">
+                                        <Grid xs={12} sm={4}>
+                                            <Card />
+                                        </Grid>
+                                        </Grid.Container>
+                                    // <Card
+                                    //     id={e.id}
+                                    //     key={e.id}
+                                    //     title={e.title}
+                                    //     image={e.image}
+                                    //     typeDiets={e.typeDiets}
+                                    //     aggregateLikes={e.aggregateLikes}
+                                    // />
                                 );
                             })}
-                </div>
+                                    </div>
             </div>
-        </>
-    );
+            </>
+            );
 };

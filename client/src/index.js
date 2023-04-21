@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import { Provider } from "react-redux"
 import { store } from './Store/index';
+import { NextUIProvider } from '@nextui-org/react';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <NextUIProvider>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </NextUIProvider>,
   document.getElementById('root')
 );
 
